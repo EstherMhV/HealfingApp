@@ -1,11 +1,11 @@
-const DiaryEntries = require('../models/DiaryEntriesModel');
+const Exercice = require('../models/ExerciceModel');
 
-const DiaryEntriesController = {
+const ExerciceController = {
 
     create: async (req, res) => {
         try {
-            const diaryEntry = await DiaryEntries.create(req.body);
-            res.status(201).send(diaryEntry);
+            const exercice = await Exercice.create(req.body);
+            res.status(201).send(exercice);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -14,8 +14,8 @@ const DiaryEntriesController = {
 
     getAll: async (req, res) => {
         try {
-            const diaryEntries = await DiaryEntries.findAll();
-            res.status(200).send(diaryEntries);
+            const exercices = await Exercice.findAll();
+            res.status(200).send(exercices);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -24,8 +24,8 @@ const DiaryEntriesController = {
 
     get: async (req, res) => {
         try {
-            const diaryEntry = await DiaryEntries.findByPk(req.params.id);
-            res.status(200).send(diaryEntry);
+            const exercice = await Exercice.findByPk(req.params.id);
+            res.status(200).send(exercice);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -34,10 +34,10 @@ const DiaryEntriesController = {
 
     update: async (req, res) => {
         try {
-            await DiaryEntries.update(req.body, {
+            await Exercice.update(req.body, {
                 where: { id: req.params.id }
             });
-            res.status(200).send('DiaryEntry updated successfully');
+            res.status(200).send('Exercice updated successfully');
         } catch (error) {
             res.status(500).send(error);
         }
@@ -46,14 +46,14 @@ const DiaryEntriesController = {
 
     delete: async (req, res) => {
         try {
-            await DiaryEntries.destroy({
+            await Exercice.destroy({
                 where: { id: req.params.id }
             });
-            res.status(200).send('DiaryEntry deleted successfully');
+            res.status(200).send('Exercice deleted successfully');
         } catch (error) {
             res.status(500).send(error);
         }
     }
 };
 
-module.exports = DiaryEntriesController;
+module.exports = ExerciceController;

@@ -1,21 +1,20 @@
-const DiaryEntries = require('../models/DiaryEntriesModel');
+const ImportantNumber = require('../models/ImportantNumberModel');
 
-const DiaryEntriesController = {
+const ImportantNumberController = {
 
     create: async (req, res) => {
         try {
-            const diaryEntry = await DiaryEntries.create(req.body);
-            res.status(201).send(diaryEntry);
+            const importantNumber = await ImportantNumber.create(req.body);
+            res.status(201).send(importantNumber);
         } catch (error) {
             res.status(500).send(error);
         }
     },
 
-
     getAll: async (req, res) => {
         try {
-            const diaryEntries = await DiaryEntries.findAll();
-            res.status(200).send(diaryEntries);
+            const importantNumbers = await ImportantNumber.findAll();
+            res.status(200).send(importantNumbers);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -24,8 +23,8 @@ const DiaryEntriesController = {
 
     get: async (req, res) => {
         try {
-            const diaryEntry = await DiaryEntries.findByPk(req.params.id);
-            res.status(200).send(diaryEntry);
+            const importantNumber = await ImportantNumber.findByPk(req.params.id);
+            res.status(200).send(importantNumber);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -34,10 +33,10 @@ const DiaryEntriesController = {
 
     update: async (req, res) => {
         try {
-            await DiaryEntries.update(req.body, {
+            await ImportantNumber.update(req.body, {
                 where: { id: req.params.id }
             });
-            res.status(200).send('DiaryEntry updated successfully');
+            res.status(200).send('ImportantNumber updated successfully');
         } catch (error) {
             res.status(500).send(error);
         }
@@ -46,14 +45,14 @@ const DiaryEntriesController = {
 
     delete: async (req, res) => {
         try {
-            await DiaryEntries.destroy({
+            await ImportantNumber.destroy({
                 where: { id: req.params.id }
             });
-            res.status(200).send('DiaryEntry deleted successfully');
+            res.status(200).send('ImportantNumber deleted successfully');
         } catch (error) {
             res.status(500).send(error);
         }
     }
 };
 
-module.exports = DiaryEntriesController;
+module.exports = ImportantNumberController;

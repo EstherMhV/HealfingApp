@@ -1,11 +1,11 @@
-const DiaryEntries = require('../models/DiaryEntriesModel');
+const Info = require('../models/InfoModel');
 
-const DiaryEntriesController = {
+const InfoController = {
 
     create: async (req, res) => {
         try {
-            const diaryEntry = await DiaryEntries.create(req.body);
-            res.status(201).send(diaryEntry);
+            const info = await Info.create(req.body);
+            res.status(201).send(info);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -14,8 +14,8 @@ const DiaryEntriesController = {
 
     getAll: async (req, res) => {
         try {
-            const diaryEntries = await DiaryEntries.findAll();
-            res.status(200).send(diaryEntries);
+            const infos = await Info.findAll();
+            res.status(200).send(infos);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -24,8 +24,8 @@ const DiaryEntriesController = {
 
     get: async (req, res) => {
         try {
-            const diaryEntry = await DiaryEntries.findByPk(req.params.id);
-            res.status(200).send(diaryEntry);
+            const info = await Info.findByPk(req.params.id);
+            res.status(200).send(info);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -34,10 +34,10 @@ const DiaryEntriesController = {
 
     update: async (req, res) => {
         try {
-            await DiaryEntries.update(req.body, {
+            await Info.update(req.body, {
                 where: { id: req.params.id }
             });
-            res.status(200).send('DiaryEntry updated successfully');
+            res.status(200).send('Info updated successfully');
         } catch (error) {
             res.status(500).send(error);
         }
@@ -46,14 +46,14 @@ const DiaryEntriesController = {
 
     delete: async (req, res) => {
         try {
-            await DiaryEntries.destroy({
+            await Info.destroy({
                 where: { id: req.params.id }
             });
-            res.status(200).send('DiaryEntry deleted successfully');
+            res.status(200).send('Info deleted successfully');
         } catch (error) {
             res.status(500).send(error);
         }
     }
 };
 
-module.exports = DiaryEntriesController;
+module.exports = InfoController;
