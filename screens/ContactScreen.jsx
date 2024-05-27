@@ -1,7 +1,62 @@
-import React from "react";
+import { useState } from "react";
+import Menu from "../components/Menu.jsx";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
 export default function Contact({ navigation }) {
+  const [activeSection, setActiveSection] = useState(null);
+
+  const renderContactPro = () => (
+    <View style={styles.contactList}>
+      <TouchableOpacity style={styles.contactButton}>
+        <Image source={require("../assets/doctolib.png")} style={styles.logo} />
+        <Text style={styles.buttonText}>Doctolib</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.contactButton}>
+        <Image
+          source={require("../assets/mondocteur.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.buttonText}>Mondocteur</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.contactButton}>
+        <Image
+          source={require("../assets/therapeutes.jpeg")}
+          style={styles.logo}
+        />
+        <Text style={styles.buttonText}>Therapeute.com</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.contactButton}>
+        <Image source={require("../assets/resalib.png")} style={styles.logo} />
+        <Text style={styles.buttonText}>Resalib</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderEmergencyNumbers = () => (
+    <View style={styles.contactList}>
+      <TouchableOpacity style={styles.contactButton}>
+        <Text style={styles.buttonText}>SOS Suicide Phénix</Text>
+        <Text style={styles.buttonText}>S01 45 39 40 00</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.contactButton}>
+        <Text style={styles.buttonText}>SOS Amitié</Text>
+        <Text style={styles.buttonText}>09 72 39 40 50</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.contactButton}>
+        <Text style={styles.buttonText}>Fil Santé Jeunes</Text>
+        <Text style={styles.buttonText}>0 800 235 236</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.contactButton}>
+        <Text style={styles.buttonText}>SAMU</Text>
+        <Text style={styles.buttonText}>15</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.contactButton}>
+        <Text style={styles.buttonText}>Numéro européen d'urgence</Text>
+        <Text style={styles.buttonText}>112</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -14,49 +69,26 @@ export default function Contact({ navigation }) {
       </View>
 
       <View style={styles.headerIcons}>
-        <View style={styles.iconContainer}>
-          {/* <Image
-            source={require("./assets/contact_pro.png")}
-            style={styles.icon}
-          /> */}
+        <TouchableOpacity
+          onPress={() => setActiveSection("contactPro")}
+          style={styles.iconContainer}
+        >
+          <Image source={require("../assets/pro.png")} style={styles.icon} />
           <Text style={styles.headerText}>Contact Pro</Text>
-        </View>
-        <View style={styles.iconContainer}>
-          {/* <Image
-            source={require("./assets/emergency_numbers.png")}
-            style={styles.icon}
-          /> */}
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setActiveSection("emergencyNumbers")}
+          style={styles.iconContainer}
+        >
+          <Image source={require("../assets/sos.png")} style={styles.icon} />
           <Text style={styles.headerText}>Numéros D'urgence</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
-      <View style={styles.contactList}>
-        <TouchableOpacity style={styles.contactButton}>
-          <Image
-            source={require("../assets/doctolib.png")}
-            style={styles.logo}
-          />
-          <Text style={styles.buttonText}>Doctolib</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contactButton}>
-          <Image
-            source={require("../assets/mondocteur.png")}
-            style={styles.logo}
-          />
-          <Text style={styles.buttonText}>Mondocteur</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contactButton}>
-          <Image
-            source={require("../assets/therapeutes.jpeg")}
-            style={styles.logo}
-          />
-          <Text style={styles.buttonText}>Therapeute.com</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contactButton}>
-          <Image source={require("../assets/resalib.png")} style={styles.logo} />
-          <Text style={styles.buttonText}>Resalib</Text>
-        </TouchableOpacity>
-      </View>
+      {activeSection === "contactPro" && renderContactPro()}
+      {activeSection === "emergencyNumbers" && renderEmergencyNumbers()}
+
+      <Menu navigation={navigation} />
     </View>
   );
 }
@@ -90,8 +122,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   icon: {
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 30,
   },
   headerText: {
     color: "#fff",

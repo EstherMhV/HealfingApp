@@ -13,7 +13,7 @@ export default function App() {
   return (
     <View style={styles.container}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName="Contact">
             {/* <Stack.Screen
               name="Home"
               component={Home}
