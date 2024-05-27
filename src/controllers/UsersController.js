@@ -1,11 +1,38 @@
 const User = require('../models/UserModel');
 
+const jwt = require('jsonwebtoken');
+
+
 const UserController = {
 
     create: async (req, res) => {
         try {
             const user = await User.create(req.body);
             res.status(201).send(user);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    },
+
+    login: async (req, res) => {
+        try {
+            const { username, password } = req.body;
+            const user = await User.findOne({ where: { username } });
+
+            if (!user) {
+                return res.status(401).send('Invalid username');
+            }
+
+            const isPasswordValid = await user.validatePassword(password);
+
+            if (!isPasswordValid) {
+                return res.status(401).send('Invalid password');
+            }
+
+            // Generate token
+            const token = jwt.sign({ id: user.id }, 'your-secret-key', { expiresIn: '1h' });
+
+            res.status(200).send({ message: 'Logged in successfully', token });
         } catch (error) {
             res.status(500).send(error);
         }

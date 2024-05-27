@@ -1,34 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const Contact = require('./ContactModel');
+const ContactController = require('./ContactController');
+const jwtMiddleware = require('./jwtMiddleware');
 
-router.get('/contacts', async (req, res) => {
-    const contacts = await Contact.findAll();
-    res.json(contacts);
-});
+router
+    .route('/contacts')
+    .get(jwtMiddleware.verifyToken, ContactController.getAllContacts)
+    .post(jwtMiddleware.verifyToken, ContactController.createContact);
 
-router.get('/contacts/:id', async (req, res) => {
-    const contact = await Contact.findByPk(req.params.id);
-    res.json(contact);
-});
-
-router.post('/contacts', async (req, res) => {
-    const newContact = await Contact.create(req.body);
-    res.json(newContact);
-});
-
-router.put('/contacts/:id', async (req, res) => {
-    await Contact.update(req.body, {
-        where: { id: req.params.id }
-    });
-    res.json({ success: 'Contact has been updated' });
-});
-
-router.delete('/contacts/:id', async (req, res) => {
-    await Contact.destroy({
-        where: { id: req.params.id }
-    });
-    res.json({ success: 'Contact has been deleted' });
-});
+router
+    .route('/contacts/:id')
+    .get(jwtMiddleware.verifyToken, ContactController.getContact)
+    .put(jwtMiddleware.verifyToken, ContactController.updateContact)
+    .delete(jwtMiddleware.verifyToken, ContactController.deleteContact);
 
 module.exports = router;

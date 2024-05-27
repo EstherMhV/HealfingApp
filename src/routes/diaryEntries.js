@@ -1,35 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const DiaryEntry = require('./DiaryEntryModel');
+const DiaryEntriesController = require('./DiaryEntriesController');
 
-router.get('/diaryEntries', async (req, res) => { 
-    const diaryEntries = await DiaryEntry.findAll();
-    res.json(diaryEntries);
-});
+router
+    .route('/diaryEntries')
+    .get(DiaryEntriesController.getAll)
+    .post(DiaryEntriesController.create);
 
-router.get('/diaryEntries/:id', async (req, res) => {
-    const diaryEntry = await DiaryEntry.findByPk(req.params.id);
-    res.json(diaryEntry);
-});
-
-router.post('/diaryEntries', async (req, res) => {
-    const newDiaryEntry = await DiaryEntry.create(req.body);
-    res.json(newDiaryEntry);
-});
-
-router.put('/diaryEntries/:id', async (req, res) => {
-    await DiaryEntry.update(req.body, {
-        where: { id: req.params.id }
-    });
-    res.json({ success: 'DiaryEntry has been updated' });
-});
-
-router.delete('/diaryEntries/:id', async (req, res) => {
-    await DiaryEntry.destroy({
-        where: { id: req.params.id }
-    });
-    res.json({ success: 'DiaryEntry has been deleted' });
-});
-
+router
+    .route('/diaryEntries/:id')
+    .get(DiaryEntriesController.get)
+    .put(DiaryEntriesController.update)
+    .delete(DiaryEntriesController.delete);
 
 module.exports = router;
