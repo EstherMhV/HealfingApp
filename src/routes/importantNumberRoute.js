@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ImportantNumberController = require('./ImportantNumberController');
+const ImportantNumberController = require('../controllers/ImportantNumberController');
 
 router
     .route('/importantNumbers')

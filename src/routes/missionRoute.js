@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const MissionController = require('./MissionController');
+const MissionController = require('../controllers/MissionsController');
 
 router
     .route('/missions')

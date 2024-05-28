@@ -7,7 +7,17 @@ const UserController = {
 
     create: async (req, res) => {
         try {
-            const user = await User.create(req.body);
+            const { username, email, password } = req.body;
+
+            const user = await User.create({
+                username,
+                email,
+                password,
+                level: 1,
+                xp: 0,
+                role: 'user'
+            });
+
             res.status(201).send(user);
         } catch (error) {
             res.status(500).send(error);

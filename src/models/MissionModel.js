@@ -4,28 +4,20 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'mysql',
 });
 
-const Profile = require('./ProfileModel');
-const Exercice = require('./ExerciceModel');
-const MissionExercice = require('./MissionExerciceModel');
+const User = require('./UserModel');
 
 const Mission = sequelize.define('mission', {
     exercice_type: DataTypes.STRING,
     reward: DataTypes.INTEGER,
-    profileId: {
+    userId: {
         type: DataTypes.INTEGER,
         references: {
-            model: Profile,
+            model: User,
             key: 'id',
         }
     },
     created_at: DataTypes.DATE,
     modified_at: DataTypes.DATE,
 });
-
-Profile.hasMany(Mission, { foreignKey: 'profileId' });
-Mission.belongsTo(Profile, { foreignKey: 'profileId' });
-
-Mission.belongsToMany(Exercice, { through: MissionExercice });
-Exercice.belongsToMany(Mission, { through: MissionExercice });
 
 module.exports = Mission;

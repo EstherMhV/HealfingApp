@@ -4,21 +4,23 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'mysql',
 });
 
-const User = require('./UserModel');
 
-const Profile = sequelize.define('profile', {
-    userId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: User,
-            key: 'id',
-        }
+const Mission = require('./MissionModel');
+
+const User = sequelize.define('profile', {
+    email: DataTypes.STRING,
+    username: DataTypes.STRING,
+    password: DataTypes.INTEGER,
+    role: {
+        type: DataTypes.ENUM,
+        values: ['admin', 'user'],
     },
+    level: DataTypes.INTEGER,
+    xp: DataTypes.INTEGER,
+    time_exo_done: DataTypes.INTEGER,
     created_at: DataTypes.DATE,
     modified_at: DataTypes.DATE,
 });
 
-User.hasOne(Profile, { foreignKey: 'userId' });
-Profile.belongsTo(User, { foreignKey: 'userId' });
 
-module.exports = Profile;
+module.exports = User;

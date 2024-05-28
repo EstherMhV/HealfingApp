@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ExerciceController = require('./ExerciceController');
+const ExerciceController = require('../controllers/ExercicesController');
 
 router
     .route('/exercices')

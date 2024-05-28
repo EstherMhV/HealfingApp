@@ -4,13 +4,13 @@ const mySequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'mysql',
 });
 
-const Profile = require('./ProfileModel');
+const User = require('./UserModel');
 
-const Missions = mySequelize.define('diaryEntries', {
-    profileId: {
+const DiaryEntries = mySequelize.define('diaryEntries', {
+    userId: {
         type: DataTypes.INTEGER,
         references: {
-            model: Profile,
+            model: User,
             key: 'id',
         }
     },
@@ -23,10 +23,11 @@ const Missions = mySequelize.define('diaryEntries', {
     },
     created_at: DataTypes.DATE,
     modified_at: DataTypes.DATE,
-});
-
-Profile.hasMany(DiaryEntries, { foreignKey: 'profileId' });
-DiaryEntries.belongsTo(Profile, { foreignKey: 'profileId' });
+})
 
 
-module.exports = Missions; 
+User.hasMany(DiaryEntries, { foreignKey: 'userId' });
+DiaryEntries.belongsTo(User, { foreignKey: 'userId' });
+
+
+module.exports = DiaryEntries; 

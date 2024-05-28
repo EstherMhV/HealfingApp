@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const UserController = require('./UserController');
+const UserController = require('../controllers/UsersController');
 
 router
-    .route('/users')
+    .route('/')
     .get(UserController.getAll)
     .post(UserController.create);
 
 router
-    .route('/users/:id')
+    .route('/:id')
     .get(UserController.get)
     .put(UserController.update)
     .delete(UserController.delete);
 
 router
-    .route('/users/login')
+    .route('/login')
     .post(UserController.login);
 
 module.exports = router;
