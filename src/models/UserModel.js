@@ -1,26 +1,46 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'mysql',
+require('dotenv').config();
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql'
 });
 
 
-const Mission = require('./MissionModel');
-
-const User = sequelize.define('profile', {
-    email: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.INTEGER,
-    role: {
-        type: DataTypes.ENUM,
-        values: ['admin', 'user'],
+const User = sequelize.define('User', {
+    username: {
+        type: Sequelize.STRING
     },
-    level: DataTypes.INTEGER,
-    xp: DataTypes.INTEGER,
-    time_exo_done: DataTypes.INTEGER,
-    created_at: DataTypes.DATE,
-    modified_at: DataTypes.DATE,
+    email: {
+        type: Sequelize.STRING
+    },
+    password: {
+        type: Sequelize.STRING
+    },
+    role: {
+        type: Sequelize.STRING,
+        defaultValue: 'user'
+    },
+    level: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1
+    },
+    xp: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    }
+}, {
+    tableName: 'users',
+    timestamps: true,
+    underscored: true
 });
 
+(async () => {
+    try {
+        await User.sync({ force: false });
+        console.log("Modèle Table Users synchronisé avec la base de données.");
+    } catch (error) {
+        console.error("Erreur lors de la synchronisation du modèle Table: Users", error);
+    }
+})();
 
 module.exports = User;

@@ -5,7 +5,12 @@ const UserController = require('../controllers/UsersController');
 router
     .route('/')
     .get(UserController.getAll)
+
+
+router
+    .route('/create')
     .post(UserController.create);
+
 
 router
     .route('/:id')

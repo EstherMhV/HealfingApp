@@ -15,6 +15,7 @@ require('./models/MissionExerciceModel');
 require('./models/Associations');
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -51,4 +52,7 @@ const contactRoute = require('./routes/contactRoute');
 app.use('/contacts', contactRoute);
 
 
-app.listen(process.env.PORT, () => console.log(`Server is running on port ${port}`));
+
+sequelize.sync().then(() => {
+    app.listen(process.env.PORT, () => console.log(`Server is running on port ${port}`));
+});

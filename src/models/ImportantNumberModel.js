@@ -1,15 +1,27 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const mySequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'mysql',
+require('dotenv').config();
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql'
 });
 
-const ImportantNumber = mySequelize.define('importantNumber', {
+const ImportantNumber = sequelize.define('ImportantNumber', {
     title: DataTypes.STRING,
-    number: DataTypes.INTEGER,
+    phoneNumber: DataTypes.INTEGER,
     description: DataTypes.STRING,
-    created_at: DataTypes.DATE,
-    modified_at: DataTypes.DATE,
+}, {
+    tableName: 'importantNumbers',
+    timestamps: true,
+    underscored: true
 });
 
-module.exports = ImportantNumber; 
+(async () => {
+    try {
+        await ImportantNumber.sync({ force: false });
+        console.log("Modèle Table ImportantNumbers synchronisé avec la base de données.");
+    } catch (error) {
+        console.error("Erreur lors de la synchronisation du modèle Table:ImportantNumbers", error);
+    }
+})();
+
+module.exports = ImportantNumber;
