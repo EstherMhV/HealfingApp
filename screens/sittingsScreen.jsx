@@ -34,7 +34,7 @@ const Settings = ({ navigation }) => {
           style={styles.option}
           onPress={() => navigation.navigate("PersonalInfo")}
         >
-          <Ionicons name="person-outline" size={24} color="#fff" />
+          <Ionicons name="finger-print-outline" size={24} color="#fff" />
           <Text style={styles.optionText}>Informations personnelles</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -48,23 +48,10 @@ const Settings = ({ navigation }) => {
           style={styles.option}
           onPress={() => navigation.navigate("Notifications")}
         >
-          <Ionicons name="bell" size={24} color="#fff" />
+          <Ionicons name="chatbox-outline" size={24} color="#fff" />
           <Text style={styles.optionText}>Notifications</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.option}
-          onPress={() => navigation.navigate("Accessibility")}
-        >
-          <Ionicons name="accessibility-outline" size={24} color="#fff" />
-          <Text style={styles.optionText}>Accessibilité</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.option}
-          onPress={() => navigation.navigate("DarkMode")}
-        >
-          <Ionicons name="moon-outline" size={24} color="#fff" />
-          <Text style={styles.optionText}>Mode sombre</Text>
-        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.option}
           onPress={() => navigation.navigate("ActivityHistory")}
@@ -74,17 +61,17 @@ const Settings = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.option}
-          onPress={() => navigation.navigate("LanguageRegion")}
-        >
-          <Ionicons name="language-outline" size={24} color="#fff" />
-          <Text style={styles.optionText}>Langue et région</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.option}
           onPress={() => navigation.navigate("PrivacyPolicy")}
         >
           <Ionicons name="shield-outline" size={24} color="#fff" />
           <Text style={styles.optionText}>Politique de confidentialité</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.option}
+          onPress={() => navigation.navigate("")}
+        >
+          <Ionicons name="exit-outline" size={24} color="#fff" />
+          <Text style={styles.optionText}>Déconnexion</Text>
         </TouchableOpacity>
       </ScrollView>
       <Menu />
