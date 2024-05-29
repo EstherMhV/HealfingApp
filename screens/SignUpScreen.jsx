@@ -63,6 +63,10 @@ export default function SignUp({ navigation }) {
           <Text style={styles.buttonText}>S'inscrire</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.linkText}>Déjà un compte ? Connexion</Text>
+        </TouchableOpacity>
+
         <Text style={styles.socialText}>Ou inscrivez-vous :</Text>
         <View style={styles.socialContainer}>
           <TouchableOpacity>
@@ -125,6 +129,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  linkText: {
+    color: "#fff",
+    marginVertical: 10,
   },
   socialText: {
     color: "#fff",
