@@ -13,35 +13,35 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <View style={styles.container}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Sittings">
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SignUp">
           <Stack.Screen
-              name="Sittings"
-              component={Settings}
-              options={{ title: "Settings" }}
-            />
-            {/* <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{ title: "Inscription" }}
+          />
+          <Stack.Screen
+            name="Sittings"
+            component={Settings}
+            options={{ title: "Parametres" }}
+          />
+          {/* <Stack.Screen
               name="Home"
               component={Home}
               options={{ title: "Home" }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{ title: "Login" }}
-            /> */}
-            {/* <Stack.Screen
-              name="Signup"
-              component={SignUp}
-              options={{ title: "Sign up" }}
-            /> */}
-            <Stack.Screen
-              name="Contact"
-              component={Contact}
-              options={{ title: "Contact" }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+            />*/}
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ title: "Login" }}
+          />
+          <Stack.Screen
+            name="Contact"
+            component={Contact}
+            options={{ title: "Contact" }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
