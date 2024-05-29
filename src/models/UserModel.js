@@ -5,6 +5,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     dialect: 'mysql'
 });
 
+const bcrypt = require('bcrypt');
+
 
 const User = sequelize.define('User', {
     username: {
@@ -14,7 +16,11 @@ const User = sequelize.define('User', {
         type: Sequelize.STRING
     },
     password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        set(value) {
+            const hash = bcrypt.hashSync(value, 10);
+            this.setDataValue('password', hash);
+        }
     },
     role: {
         type: Sequelize.STRING,
@@ -42,5 +48,9 @@ const User = sequelize.define('User', {
         console.error("Erreur lors de la synchronisation du modèle Table: Users", error);
     }
 })();
+
+User.prototype.validatePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = User;

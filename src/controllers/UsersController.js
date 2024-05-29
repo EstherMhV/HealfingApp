@@ -26,25 +26,25 @@ const UserController = {
 
     login: async (req, res) => {
         try {
-            const { username, password } = req.body;
-            const user = await User.findOne({ where: { username } });
-
-            if (!user) {
-                return res.status(401).send('Invalid username');
-            }
-
+            const { email, password } = req.body;
+            const user = await User.findOne({ where: { email } });
             const isPasswordValid = await user.validatePassword(password);
 
-            if (!isPasswordValid) {
-                return res.status(401).send('Invalid password');
+            if (!user) {
+                return res.status(401).send('Invalid creditentials');
             }
 
-            // Generate token
-            const token = jwt.sign({ id: user.id }, 'your-secret-key', { expiresIn: '1h' });
 
-            res.status(200).send({ message: 'Logged in successfully', token });
+            if (!isPasswordValid) {
+                return res.status(401).send('Invalid creditentials');
+            }
+
+
+            // const token = jwt.sign({ id: user.id }, 'your-secret-key', { expiresIn: '1h' });
+
+            res.status(200).send({ message: 'Logged in successfully' });
         } catch (error) {
-            res.status(500).send(error);
+            res.status(500).send({ message: 'error login', message: error });
         }
     },
 
