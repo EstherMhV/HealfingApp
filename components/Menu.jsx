@@ -1,56 +1,42 @@
+import { Ionicons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
 export default function Menu({ navigation }) {
   return (
     <View style={styles.menu}>
       <TouchableOpacity
-        style={styles.menuButton}
-        onPress={() => navigation.navigate("Exercices")}
+        style={styles.menuItem}
+        onPress={() => navigation.navigate("Exercises")}
       >
-        <Image
-          source={require("../assets/exercices.png")}
-          style={styles.menuIcon}
-        />
+        <Ionicons name="barbell-outline" size={24} color="#fff" />
         <Text style={styles.menuText}>Exercices</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.menuButton}
-        onPress={() => navigation.navigate("Actus")}
+        style={styles.menuItem}
+        onPress={() => navigation.navigate("News")}
       >
-        <Image
-          source={require("../assets/actus.png")}
-          style={styles.menuIcon}
-        />
+        <Ionicons name="newspaper-outline" size={24} color="#fff" />
         <Text style={styles.menuText}>Actus</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.menuButton}
+        style={styles.menuItem}
         onPress={() => navigation.navigate("Journal")}
       >
-        <Image
-          source={require("../assets/diary.png")}
-          style={styles.menuIcon}
-        />
+        <Ionicons name="book-outline" size={24} color="#fff" />
         <Text style={styles.menuText}>Journal</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.menuButton}
+        style={styles.menuItem}
         onPress={() => navigation.navigate("Contact")}
       >
-        <Image
-          source={require("../assets/contact.png")}
-          style={styles.menuIcon}
-        />
+        <Ionicons name="call-outline" size={24} color="#fff" />
         <Text style={styles.menuText}>Contact</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.menuButton}
-        onPress={() => navigation.navigate("Profil")}
+        style={styles.menuItem}
+        onPress={() => navigation.navigate("Profile")}
       >
-        <Image
-          source={require("../assets/profile.png")}
-          style={styles.menuIcon}
-        />
+        <Ionicons name="person-outline" size={24} color="#fff" />
         <Text style={styles.menuText}>Profil</Text>
       </TouchableOpacity>
     </View>
@@ -58,22 +44,18 @@ export default function Menu({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  menu: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 10,
-    backgroundColor: "#3E2E72",
-  },
-  menuButton: {
-    alignItems: "center",
-  },
-  menuIcon: {
-    width: 30,
-    height: 30,
-  },
   menuText: {
     color: "#fff",
     fontSize: 12,
     marginTop: 5,
+  },
+  menu: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 16,
+    backgroundColor: "#3E2E72",
+  },
+  menuItem: {
+    alignItems: "center",
   },
 });
