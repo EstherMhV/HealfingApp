@@ -40,7 +40,7 @@ const UserController = {
             }
 
 
-            // const token = jwt.sign({ id: user.id }, 'your-secret-key', { expiresIn: '1h' });
+            const token = jwt.sign({ id: user.id }, 'your-secret-key', { expiresIn: '1h' });
 
             res.status(200).send({ message: 'Logged in successfully' });
         } catch (error) {

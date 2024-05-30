@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const ContactController = require('../controllers/ContactsController');
-
+const ContactsController = require('../controllers/ContactsController');
+const jwtMiddleware = require('../middlewares/jwtMiddleware');
 
 router
     .route('/contacts')
-    .get( ContactController.getAllContacts)
-    .post( ContactController.createContact);
+    .get( ContactsController.getAllContacts)
+    .post( jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ContactsController.createContact);
 
 router
     .route('/contacts/:id')
-    .get( ContactController.getContact)
-    .put( ContactController.updateContact)
-    .delete( ContactController.deleteContact);
+    .get( jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ContactsController.getContact)
+    .put( jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ContactsController.updateContact)
+    .delete( jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ContactsController.deleteContact);
 
 module.exports = router;
