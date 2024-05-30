@@ -15,7 +15,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Set">
+        <Stack.Navigator initialRouteName="Settings">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -46,6 +46,7 @@ export default function App() {
             component={PersonalData}
             options={{ title: "Informations personelles" }}
           />
+
         </Stack.Navigator>
       </NavigationContainer>
     </View>

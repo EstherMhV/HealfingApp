@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Menu from "../components/Menu.jsx";
+import { Ionicons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
 const Contact = ({ navigation }) => {
@@ -36,7 +37,7 @@ const Contact = ({ navigation }) => {
     <View style={styles.contactList}>
       <TouchableOpacity style={styles.contactButton}>
         <Text style={styles.buttonText}>SOS Suicide Phénix</Text>
-        <Text style={styles.buttonText}>S01 45 39 40 00</Text>
+        <Text style={styles.buttonText}>01 45 39 40 00</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
         <Text style={styles.buttonText}>SOS Amitié</Text>
@@ -73,14 +74,14 @@ const Contact = ({ navigation }) => {
           onPress={() => setActiveSection("contactPro")}
           style={styles.iconContainer}
         >
-          <Image source={require("../assets/pro.png")} style={styles.icon} />
+          <Ionicons name="medkit-outline" size={30} color="#fff" />
           <Text style={styles.headerText}>Contact Pro</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setActiveSection("emergencyNumbers")}
           style={styles.iconContainer}
         >
-          <Image source={require("../assets/sos.png")} style={styles.icon} />
+          <Ionicons name="apps-outline" size={30} color="#fff" />
           <Text style={styles.headerText}>Numéros D'urgence</Text>
         </TouchableOpacity>
       </View>

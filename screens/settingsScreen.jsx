@@ -152,14 +152,13 @@ const styles = StyleSheet.create({
     color: "#f00",
     fontWeight: "bold",
   },
-    header: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      backgroundColor: "#3F317E",
-    },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "#3F317E",
+  },
 });
 
 export default Settings;
