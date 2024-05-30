@@ -13,4 +13,4 @@ router
     .put(NewsController.update)
     .delete(NewsController.delete);
 
-module.exports = router;
+module.exports = router; 
