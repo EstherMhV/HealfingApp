@@ -4,11 +4,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Home from "./screens/homeScreen.jsx";
 import Login from "./screens/loginScreen.jsx";
+import Diary from "./screens/diaryScreen.jsx";
 import SignUp from "./screens/signUpScreen.jsx";
 import Contact from "./screens/contactScreen.jsx";
-import Settings from "./screens/settingsScreen.jsx";
-import PersonalData from "./screens/personalDataScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
+import Settings from "./screens/settingsScreen.jsx";
+import AddDataDiary from "./screens/addDataDiary.jsx";
+import PersonalData from "./screens/personalDataScreen.jsx";
 
 const Stack = createStackNavigator();
 
@@ -16,7 +18,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Settings">
+        <Stack.Navigator initialRouteName="Diary">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -33,14 +35,24 @@ export default function App() {
             options={{ title: "Home" }}
           />
           <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{ title: "Profil" }}
+            name="Diary"
+            component={Diary}
+            options={{ title: "Diary" }}
+          />
+          <Stack.Screen
+            name="AddDataDiary"
+            component={AddDataDiary}
+            options={{ title: "Add data diary" }}
           />
           <Stack.Screen
             name="Contact"
             component={Contact}
             options={{ title: "Contact" }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{ title: "Profil" }}
           />
           <Stack.Screen
             name="Settings"
@@ -52,7 +64,6 @@ export default function App() {
             component={PersonalData}
             options={{ title: "Informations personelles" }}
           />
-
         </Stack.Navigator>
       </NavigationContainer>
     </View>

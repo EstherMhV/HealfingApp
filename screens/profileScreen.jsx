@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Menu from "../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 const Profil = ({ navigation }) => {
   return (
@@ -14,10 +14,6 @@ const Profil = ({ navigation }) => {
       </View>
 
       <View style={styles.profileImageContainer}>
-        {/* <Image
-          source={require("../assets/profile.jpg")} 
-          style={styles.profileImage}
-        /> */}
         <Text>image de profil</Text>
       </View>
 

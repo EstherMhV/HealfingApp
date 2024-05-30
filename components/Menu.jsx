@@ -23,7 +23,7 @@ const Menu = () => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.menuItem}
-        onPress={() => navigation.navigate("Journal")}
+        onPress={() => navigation.navigate("Diary")}
       >
         <Ionicons name="book-outline" size={24} color="#fff" />
         <Text style={styles.menuText}>Journal</Text>

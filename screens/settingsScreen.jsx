@@ -66,7 +66,6 @@ const Settings = ({ navigation }) => {
           <Text style={styles.optionText}>Historique d'activité</Text>
         </TouchableOpacity>
 
-        
         <TouchableOpacity
           style={styles.option}
           onPress={() => navigation.navigate("PrivacyPolicy")}
@@ -89,7 +88,9 @@ const Settings = ({ navigation }) => {
           <Text style={styles.optionTextLogout}>Déconnexion</Text>
         </TouchableOpacity>
       </ScrollView>
-      <Menu />
+      <View style={styles.footer}>
+        <Menu navigation={navigation} />
+      </View>
     </View>
   );
 };
@@ -157,6 +158,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 20,
+    backgroundColor: "#3F317E",
+  },
+  footer: {
     backgroundColor: "#3F317E",
   },
 });
