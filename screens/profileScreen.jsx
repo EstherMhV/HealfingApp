@@ -1,4 +1,3 @@
-import React from "react";
 import Menu from "../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
