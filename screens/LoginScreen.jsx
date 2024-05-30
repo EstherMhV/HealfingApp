@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function Login({ navigation }) {
+const Login = ({ navigation }) => {
   return (
     <View style={styles.background}>
       <View style={styles.container}>
@@ -71,7 +71,7 @@ export default function Login({ navigation }) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   background: {
@@ -142,3 +142,5 @@ const styles = StyleSheet.create({
     width: "50%",
   },
 });
+
+export default Login;

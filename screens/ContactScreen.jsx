@@ -2,7 +2,7 @@ import { useState } from "react";
 import Menu from "../components/Menu.jsx";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
-export default function Contact({ navigation }) {
+const Contact = ({ navigation }) => {
   const [activeSection, setActiveSection] = useState(null);
 
   const renderContactPro = () => (
@@ -60,11 +60,11 @@ export default function Contact({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
+        <TouchableOpacity onPress={() => navigation.goBack("homeScreen")}>
+          <Ionicons name="arrow-back-outline" size={30} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.menuButton}>≡</Text>
+          <Ionicons name="menu-outline" size={30} color="#fff" />
         </TouchableOpacity>
       </View>
 
@@ -91,7 +91,7 @@ export default function Contact({ navigation }) {
       <Menu navigation={navigation} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -154,3 +154,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+export default Contact;

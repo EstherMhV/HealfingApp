@@ -1,6 +1,6 @@
 import { View, Text, ScrollView } from "react-native";
 
-export default function Home({ navigation }) {
+const Home = ({ navigation }) => {
   return (
     <ScrollView>
       <View>
@@ -8,4 +8,6 @@ export default function Home({ navigation }) {
       </View>
     </ScrollView>
   );
-}
+};
+
+export default Home;

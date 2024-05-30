@@ -7,13 +7,19 @@ import {
   TextInput,
 } from "react-native";
 import Menu from "../components/Menu.jsx";
-import Header from "../components/Header.jsx";
 import { Ionicons } from "@expo/vector-icons";
 
 const Settings = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack("homeScreen")}>
+          <Ionicons name="arrow-back-outline" size={30} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Ionicons name="menu-outline" size={30} color="#fff" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.inputContainer}>
         <Ionicons
           name="search-outline"
@@ -32,7 +38,7 @@ const Settings = ({ navigation }) => {
       <ScrollView style={styles.scrollContainer}>
         <TouchableOpacity
           style={styles.option}
-          onPress={() => navigation.navigate("PersonalInfo")}
+          onPress={() => navigation.navigate("personalData")}
         >
           <Ionicons name="finger-print-outline" size={24} color="#fff" />
           <Text style={styles.optionText}>Informations personnelles</Text>
@@ -59,6 +65,8 @@ const Settings = ({ navigation }) => {
           <Ionicons name="time-outline" size={24} color="#fff" />
           <Text style={styles.optionText}>Historique d'activité</Text>
         </TouchableOpacity>
+
+        
         <TouchableOpacity
           style={styles.option}
           onPress={() => navigation.navigate("PrivacyPolicy")}
@@ -68,10 +76,17 @@ const Settings = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.option}
+          onPress={() => navigation.navigate("Notifications")}
+        >
+          <Ionicons name="build-outline" size={24} color="#fff" />
+          <Text style={styles.optionText}>Signaler un bug</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.option}
           onPress={() => navigation.navigate("")}
         >
-          <Ionicons name="exit-outline" size={24} color="#fff" />
-          <Text style={styles.optionText}>Déconnexion</Text>
+          <Ionicons name="exit-outline" size={24} color="#f00" />
+          <Text style={styles.optionTextLogout}>Déconnexion</Text>
         </TouchableOpacity>
       </ScrollView>
       <Menu />
@@ -131,6 +146,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#fff",
   },
+  optionTextLogout: {
+    marginLeft: 16,
+    fontSize: 16,
+    color: "#f00",
+    fontWeight: "bold",
+  },
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      backgroundColor: "#3F317E",
+    },
 });
 
 export default Settings;

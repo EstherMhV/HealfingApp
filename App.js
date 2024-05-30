@@ -6,7 +6,8 @@ import Home from "./screens/homeScreen.jsx";
 import Login from "./screens/loginScreen.jsx";
 import SignUp from "./screens/signUpScreen.jsx";
 import Contact from "./screens/contactScreen.jsx";
-import Settings from "./screens/sittingsScreen.jsx";
+import Settings from "./screens/settingsScreen.jsx";
+import PersonalData from "./screens/personalDataScreen.jsx";
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Sittings">
+        <Stack.Navigator initialRouteName="Set">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -26,19 +27,24 @@ export default function App() {
             options={{ title: "Connexion" }}
           />
           <Stack.Screen
-            name="Sittings"
-            component={Settings}
-            options={{ title: "Parametres" }}
+            name="Home"
+            component={Home}
+            options={{ title: "Home" }}
           />
-          {/* <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ title: "Home" }}
-            />*/}
           <Stack.Screen
             name="Contact"
             component={Contact}
             options={{ title: "Contact" }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{ title: "Parametres" }}
+          />
+          <Stack.Screen
+            name="personalData"
+            component={PersonalData}
+            options={{ title: "Informations personelles" }}
           />
         </Stack.Navigator>
       </NavigationContainer>

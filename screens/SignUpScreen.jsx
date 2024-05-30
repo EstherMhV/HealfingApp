@@ -3,18 +3,16 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ImageBackground,
   Image,
   StyleSheet,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function SignUp({ navigation }) {
+const SignUp = ({ navigation }) => {
   return (
     <View style={styles.background}>
       <View style={styles.container}>
         <Image source={require("../assets/logo.png")} style={styles.logo} />
-
         <View style={styles.inputContainer}>
           <Ionicons
             name="person-outline"
@@ -79,7 +77,7 @@ export default function SignUp({ navigation }) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   background: {
@@ -144,3 +142,5 @@ const styles = StyleSheet.create({
     width: "50%",
   },
 });
+
+export default SignUp;
