@@ -36,24 +36,44 @@ const Contact = ({ navigation }) => {
   const renderEmergencyNumbers = () => (
     <View style={styles.contactList}>
       <TouchableOpacity style={styles.contactButton}>
-        <Text style={styles.buttonText}>SOS Suicide Phénix</Text>
-        <Text style={styles.buttonText}>01 45 39 40 00</Text>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.buttonText}>SOS Suicide Phénix</Text>
+        </View>
+        <View style={styles.buttonNumberContainer}>
+          <Text style={styles.buttonText}>01 45 39 40 00</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
-        <Text style={styles.buttonText}>SOS Amitié</Text>
-        <Text style={styles.buttonText}>09 72 39 40 50</Text>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.buttonText}>SOS Amitié</Text>
+        </View>
+        <View style={styles.buttonNumberContainer}>
+          <Text style={styles.buttonText}>09 72 39 40 50</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
-        <Text style={styles.buttonText}>Fil Santé Jeunes</Text>
-        <Text style={styles.buttonText}>0 800 235 236</Text>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.buttonText}>Fil Santé Jeunes</Text>
+        </View>
+        <View style={styles.buttonNumberContainer}>
+          <Text style={styles.buttonText}>0 800 235 236</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
-        <Text style={styles.buttonText}>SAMU</Text>
-        <Text style={styles.buttonText}>15</Text>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.buttonText}>SAMU</Text>
+        </View>
+        <View style={styles.buttonNumberContainer}>
+          <Text style={styles.buttonText}>15</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
-        <Text style={styles.buttonText}>Numéro européen d'urgence</Text>
-        <Text style={styles.buttonText}>112</Text>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.buttonText}>Numéro européen d'urgence</Text>
+        </View>
+        <View style={styles.buttonNumberContainer}>
+          <Text style={styles.buttonText}>112</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -89,7 +109,9 @@ const Contact = ({ navigation }) => {
       {activeSection === "contactPro" && renderContactPro()}
       {activeSection === "emergencyNumbers" && renderEmergencyNumbers()}
 
-      <Menu navigation={navigation} />
+      <View style={styles.footer}>
+        <Menu navigation={navigation} />
+      </View>
     </View>
   );
 };
@@ -98,6 +120,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#120B2D",
+    justifyContent: "space-between",
   },
   header: {
     flexDirection: "row",
@@ -145,6 +168,13 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "80%",
   },
+  buttonTextContainer: {
+    flex: 1,
+  },
+  buttonNumberContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
   logo: {
     width: 30,
     height: 30,
@@ -153,6 +183,9 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 18,
+  },
+  footer: {
+    backgroundColor: "#3F317E",
   },
 });
 

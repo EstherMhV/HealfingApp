@@ -8,6 +8,7 @@ import SignUp from "./screens/signUpScreen.jsx";
 import Contact from "./screens/contactScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
+import Profile from "./screens/profileScreen.jsx";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ export default function App() {
             name="Home"
             component={Home}
             options={{ title: "Home" }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{ title: "Profil" }}
           />
           <Stack.Screen
             name="Contact"
