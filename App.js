@@ -57,12 +57,12 @@ export default function App() {
           <Stack.Screen
             name="Settings"
             component={Settings}
-            options={{ title: "Parametres" }}
+            options={{ title: "Paramètres" }}
           />
           <Stack.Screen
             name="personalData"
             component={PersonalData}
-            options={{ title: "Informations personelles" }}
+            options={{ title: "Informations personnelles" }}
           />
         </Stack.Navigator>
       </NavigationContainer>

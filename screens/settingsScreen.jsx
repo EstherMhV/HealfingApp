@@ -13,7 +13,7 @@ const Settings = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack("homeScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Ionicons name="arrow-back-outline" size={30} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity>

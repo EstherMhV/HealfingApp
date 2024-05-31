@@ -1,9 +1,9 @@
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image,
   ScrollView,
 } from "react-native";
 import Menu from "../components/Menu.jsx";
@@ -21,9 +21,6 @@ const Home = ({ navigation }) => {
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.profileContainer}>
-          <TouchableOpacity style={styles.settingsIcon}>
-            <Ionicons name="settings-outline" size={24} color="#fff" onPress={() => navigation.goBack("settingsScreen")} />
-          </TouchableOpacity>
           <View style={styles.profileDetails}>
             <Text style={styles.levelText}>Niveau 05</Text>
             <View style={styles.xpContainer}>
@@ -33,6 +30,12 @@ const Home = ({ navigation }) => {
               </View>
             </View>
           </View>
+          <TouchableOpacity
+            style={styles.settingsIcon}
+            onPress={() => navigation.navigate("Settings")}
+          >
+            <Ionicons name="settings-outline" size={24} color="#fff" />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.separatorContainer}>
@@ -98,10 +101,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#3F317E",
     position: "relative",
   },
-  backIcon: {
-    position: "absolute",
-    left: 20,
-  },
   notificationIcon: {
     position: "absolute",
     right: 20,
@@ -123,12 +122,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#00E0FF",
     padding: 10,
     borderRadius: 10,
-  },
-  profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginRight: 20,
   },
   profileDetails: {
     flex: 1,
@@ -162,9 +155,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   settingsIcon: {
-    position: "absolute",
-    right: 10,
-    top: 10,
+    marginLeft: 10,
   },
   separatorContainer: {
     flexDirection: "row",
