@@ -1,25 +1,45 @@
-import React from "react";
+
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Animated,
 } from "react-native";
+import { useState, useRef } from "react";
 import Menu from "../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
 
 const Home = ({ navigation }) => {
+  const [isProfileScrolled, setIsProfileScrolled] = useState(false);
+  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const handleScroll = (event) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    if (offsetY > 50 && !isProfileScrolled) {
+      setIsProfileScrolled(true);
+      navigation.navigate("Profile");
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Profile")}
+        style={styles.header}
+      >
         <Text style={styles.headerText}>Nom et prénom</Text>
         <TouchableOpacity style={styles.notificationIcon}>
           <Ionicons name="notifications-outline" size={24} color="#fff" />
         </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
 
-      <ScrollView contentContainerStyle={styles.content}>
+      <Animated.ScrollView
+        contentContainerStyle={styles.content}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
         <View style={styles.profileContainer}>
           <View style={styles.profileDetails}>
             <Text style={styles.levelText}>Niveau 05</Text>
@@ -34,7 +54,7 @@ const Home = ({ navigation }) => {
             style={styles.settingsIcon}
             onPress={() => navigation.navigate("Settings")}
           >
-            <Ionicons name="settings-outline" size={24} color="#fff" />
+            <Ionicons name="settings-outline" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 
@@ -78,7 +98,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.newsReadMore}>Lire la suite</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
 
       <View style={styles.footer}>
         <Menu navigation={navigation} />
@@ -119,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 20,
-    backgroundColor: "#00E0FF",
+    backgroundColor: "#B8F8FF",
     padding: 10,
     borderRadius: 10,
   },
@@ -224,3 +244,5 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+
+
