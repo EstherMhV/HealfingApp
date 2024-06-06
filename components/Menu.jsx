@@ -9,7 +9,7 @@ const Menu = () => {
     <View style={styles.menu}>
       <TouchableOpacity
         style={styles.menuItem}
-        onPress={() => navigation.navigate("Exercises")}
+        onPress={() => navigation.navigate("Categories List Exercises")}
       >
         <Ionicons name="barbell-outline" size={24} color="#fff" />
         <Text style={styles.menuText}>Exercices</Text>

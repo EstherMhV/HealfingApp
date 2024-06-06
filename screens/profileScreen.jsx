@@ -1,6 +1,6 @@
 import Menu from "../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
 
 const Profil = ({ navigation }) => {
   return (
@@ -12,33 +12,11 @@ const Profil = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.profileImageContainer}>
-        <Text>image de profil</Text>
-      </View>
+      
 
-      <View style={styles.statsContainer}>
-        <View style={styles.statBox}>
-          <Ionicons name="time-outline" size={30} color="#fff" />
-          <Text style={styles.statText}>Temps joué :</Text>
-          <Text style={styles.statValue}>20 h</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Ionicons name="time-outline" size={30} color="#fff" />
-          <Text style={styles.statText}>Temps sur L'application</Text>
-          <Text style={styles.statValue}>25 h</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Ionicons name="shield-outline" size={30} color="#fff" />
-          <Text style={styles.statText}>Expérience totale Gagnée</Text>
-          <Text style={styles.statValue}>50 XP</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Ionicons name="medal-outline" size={30} color="#fff" />
-          <Text style={styles.statText}>Exercices totaux Accomplies</Text>
-          <Text style={styles.statValue}>10</Text>
-        </View>
-      </View>
-
+     <ScrollView>
+      
+     </ScrollView>
       <View style={styles.footer}>
         <Menu navigation={navigation} />
       </View>

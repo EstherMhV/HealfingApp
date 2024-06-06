@@ -12,6 +12,9 @@ import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
+import Meditation from "./screens/exercices/meditationScreen.jsx";
+import CategoriesExercices from "./screens/categoriesExercices.jsx";
+import DeepBreathing from "./screens/exercices/DeepBreathingScreen.jsx";
 
 const Stack = createStackNavigator();
 
@@ -19,7 +22,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Error 404">
+        <Stack.Navigator initialRouteName="Categories List Exercises">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -69,6 +72,21 @@ export default function App() {
             name="Error 404"
             component={Error404}
             options={{ title: "Error" }}
+          />
+          <Stack.Screen
+            name="Categories List Exercises"
+            component={CategoriesExercices}
+            options={{ title: "Catégories d'exercices" }}
+          />
+          <Stack.Screen
+            name="Meditation"
+            component={Meditation}
+            options={{ title: "Méditation" }}
+          />
+          <Stack.Screen
+            name="DeepBreathing"
+            component={DeepBreathing}
+            options={{ title: "Respiration profonde" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
