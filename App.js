@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Home from "./screens/homeScreen.jsx";
+import Error404 from "./screens/error404.jsx";
 import Login from "./screens/loginScreen.jsx";
 import Diary from "./screens/diaryScreen.jsx";
 import SignUp from "./screens/signUpScreen.jsx";
@@ -18,7 +19,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Error 404">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -63,6 +64,11 @@ export default function App() {
             name="personalData"
             component={PersonalData}
             options={{ title: "Informations personnelles" }}
+          />
+          <Stack.Screen
+            name="Error 404"
+            component={Error404}
+            options={{ title: "Error" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
