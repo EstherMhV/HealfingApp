@@ -12,9 +12,14 @@ import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
+import ArtTherapy from "./screens/exercices/ArtTherapyScreen.jsx";
 import Meditation from "./screens/exercices/meditationScreen.jsx";
 import CategoriesExercices from "./screens/categoriesExercices.jsx";
+import Mindfulness from "./screens/exercices/MindfulnessScreen.jsx";
 import DeepBreathing from "./screens/exercices/DeepBreathingScreen.jsx";
+import MuscleRelaxation from "./screens/exercices/MuscleRelaxationScreen.jsx";
+import SensoryAnchoring from "./screens/exercices/SensoryAnchoringScreen.jsx";
+import AuditoryRelaxation from "./screens/exercices/AuditoryRelaxationScreen.jsx";
 
 const Stack = createStackNavigator();
 
@@ -87,6 +92,31 @@ export default function App() {
             name="DeepBreathing"
             component={DeepBreathing}
             options={{ title: "Respiration profonde" }}
+          />
+          <Stack.Screen
+            name="MuscleRelaxation"
+            component={MuscleRelaxation}
+            options={{ title: "Relaxation musclulaire" }}
+          />
+          <Stack.Screen
+            name="Mindfulness"
+            component={Mindfulness}
+            options={{ title: "Pleine conscience" }}
+          />
+          <Stack.Screen
+            name="SensoryAnchoring"
+            component={SensoryAnchoring}
+            options={{ title: "Ancrage sensorielle" }}
+          />
+          <Stack.Screen
+            name="AuditoryRelaxation"
+            component={AuditoryRelaxation}
+            options={{ title: "Relaxation auditive" }}
+          />
+          <Stack.Screen
+            name="ArtTherapy"
+            component={ArtTherapy}
+            options={{ title: "Art thérapie" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
