@@ -1,6 +1,14 @@
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+} from "react-native";
 import Menu from "../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Profil = ({ navigation }) => {
   return (
@@ -12,11 +20,46 @@ const Profil = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      
+      <ScrollView>
+        <View style={styles.statsContainer}>
+          <LinearGradient
+            colors={["#3F317E", "#7259E4"]}
+            style={styles.statBox}
+          >
+            <Ionicons name="time-outline" size={30} color="#fff" />
+            <Text style={styles.statText}>Temps joué :</Text>
+            <Text style={styles.statValue}>20 h</Text>
+          </LinearGradient>
 
-     <ScrollView>
-      
-     </ScrollView>
+          <LinearGradient
+            colors={["#3F317E", "#7259E4"]}
+            style={styles.statBox}
+          >
+            <Ionicons name="time-outline" size={30} color="#fff" />
+            <Text style={styles.statText}>Temps sur L’application</Text>
+            <Text style={styles.statValue}>25 h</Text>
+          </LinearGradient>
+
+          <LinearGradient
+            colors={["#3F317E", "#7259E4"]}
+            style={styles.statBox}
+          >
+            <Ionicons name="shield-checkmark-outline" size={30} color="#fff" />
+            <Text style={styles.statText}>Expérience totale Gagnée</Text>
+            <Text style={styles.statValue}>50 XP</Text>
+          </LinearGradient>
+
+          <LinearGradient
+            colors={["#3F317E", "#7259E4"]}
+            style={styles.statBox}
+          >
+            <Ionicons name="trophy-outline" size={30} color="#fff" />
+            <Text style={styles.statText}>Exercices totaux Accomplis</Text>
+            <Text style={styles.statValue}>10</Text>
+          </LinearGradient>
+        </View>
+      </ScrollView>
+
       <View style={styles.footer}>
         <Menu navigation={navigation} />
       </View>
@@ -58,7 +101,6 @@ const styles = StyleSheet.create({
     borderRadius: 75,
   },
   statsContainer: {
-    flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
@@ -66,7 +108,6 @@ const styles = StyleSheet.create({
   },
   statBox: {
     width: "45%",
-    backgroundColor: "#7259E4",
     borderRadius: 10,
     padding: 20,
     marginVertical: 10,
