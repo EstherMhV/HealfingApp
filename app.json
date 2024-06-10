@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Quizz",
-    "slug": "Quizz",
+    "name": "healfingApp",
+    "slug": "healfing-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.healfingApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
+    
   }
 }
