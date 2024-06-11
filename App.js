@@ -2,6 +2,10 @@ import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import {AppRegistry} from 'react-native';
+import {name as appName} from './app.json';
+
+
 import Home from "./screens/homeScreen.jsx";
 import Login from "./screens/loginScreen.jsx";
 import Diary from "./screens/diaryScreen.jsx";
@@ -11,7 +15,9 @@ import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
+AppRegistry.registerComponent(appName, () => App);
 const Stack = createStackNavigator();
 
 export default function App() {
