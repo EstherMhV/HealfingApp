@@ -1,146 +1,108 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React, { useContext, useState } from 'react';
+import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { AuthContext } from './AuthProvider';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-const SignUp = ({ navigation }) => {
+
+const SignUpScreen = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
+  const [username, setUsername] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const { updateUserInfo } = useContext(AuthContext);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const navigation = navigation(); 
+
+  const handleSignUp = () => {
+    if (password !== passwordConfirm) {
+      Alert.alert("Error", "Passwords do not match.");
+      return;
+    }
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log("User created:", userCredential.user);
+        navigation.navigate('HomeScreen'); // Naviguez vers HomeScreen après l'inscription réussie
+      })
+      .catch((error) => {
+        console.error("Error signing up:", error.message);
+        Alert.alert("Error", error.message); // Utilisez Alert pour afficher les erreurs
+      });
+  };
+
   return (
-    <View style={styles.background}>
-      <View style={styles.container}>
-        <Image source={require("../assets/logo.png")} style={styles.logo} />
-        <View style={styles.inputContainer}>
-          <Ionicons
-            name="person-outline"
-            size={30}
-            color="#fff"
-            style={styles.icon}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Pseudo"
-            placeholderTextColor="#fff"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Ionicons
-            name="mail-outline"
-            size={30}
-            color="#fff"
-            style={styles.icon}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#fff"
-            keyboardType="email-address"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Ionicons
-            name="lock-closed-outline"
-            size={30}
-            color="#fff"
-            style={styles.icon}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Mot de passe"
-            placeholderTextColor="#fff"
-            keyboardType="email-address"
-          />
-        </View>
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>S'inscrire</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.linkText}>Déjà un compte ? Connexion</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.socialText}>Ou inscrivez-vous :</Text>
-        <View style={styles.socialContainer}>
-          <TouchableOpacity>
-            <Ionicons name="logo-instagram" size={40} color="#f4fefe" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Ionicons name="logo-facebook" size={40} color="#faf0e6" />
-          </TouchableOpacity>
-        </View>
-      </View>
+    <View style={styles.container}>
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+        keyboardType="email-address"
+      />
+      {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Age"
+        value={age}
+        onChangeText={setAge}
+        style={styles.input}
+        keyboardType="numeric"
+      />
+      <TextInput
+        placeholder="Gender"
+        value={gender}
+        onChangeText={setGender}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={!passwordVisible} 
+        style={styles.input}
+      />
+      {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
+      <TextInput
+        placeholder="Confirm Password"
+        value={passwordConfirm}
+        onChangeText={setPasswordConfirm}
+        secureTextEntry={!passwordVisible}
+        style={styles.input}
+      />
+      <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
+        <Text>{passwordVisible ? "Hide Password" : "Show Password"}</Text>
+      </TouchableOpacity>
+      <Button title="Sign Up" onPress={() => { handleSignUp }} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    backgroundColor: "#3F317E",
-    justifyContent: "center",
-  },
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 30,
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 40,
-    resizeMode: "contain",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-    borderRadius: 25,
-    paddingHorizontal: 15,
-    marginVertical: 10,
-  },
-  icon: {
-    marginRight: 10,
+    justifyContent: 'center',
+    padding: 20,
   },
   input: {
-    flex: 1,
-    height: 50,
-    color: "#fff",
+    marginBottom: 10,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
   },
-  button: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "#00BFFF",
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 20,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  linkText: {
-    color: "#fff",
-    marginVertical: 10,
-  },
-  socialText: {
-    color: "#fff",
-    marginVertical: 10,
-  },
-  socialContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "50%",
+  error: {
+    color: 'red',
+    marginBottom: 10,
   },
 });
 
-export default SignUp;
+export default SignUpScreen;
