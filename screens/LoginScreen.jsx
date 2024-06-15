@@ -12,7 +12,7 @@ const Login = ({ navigation }) => {
   return (
     <View style={styles.background}>
       <View style={styles.container}>
-        <Image source={require("../assets/logo.png")} style={styles.logo} />
+        <Image source={require("../assets/img/logo.png")} style={styles.logo} />
 
         <View style={styles.inputContainer}>
           <Ionicons
@@ -105,19 +105,19 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     height: 50,
-    color: "#fff",
+    color: "#E6E0F0",
   },
   button: {
     width: "100%",
     height: 50,
-    backgroundColor: "#00BFFF",
+    backgroundColor: "#B8F8FF",
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 20,
   },
   buttonText: {
-    color: "#fff",
+    color: "#120B2D",
     fontSize: 18,
     fontWeight: "bold",
   },

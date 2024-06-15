@@ -6,15 +6,16 @@ import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 
 
-import Home from "./screens/homeScreen.jsx";
-import Login from "./screens/loginScreen.jsx";
-import Diary from "./screens/diaryScreen.jsx";
-import SignUp from "./screens/signUpScreen.jsx";
-import Contact from "./screens/contactScreen.jsx";
-import Profile from "./screens/profileScreen.jsx";
-import Settings from "./screens/settingsScreen.jsx";
-import AddDataDiary from "./screens/addDataDiary.jsx";
-import PersonalData from "./screens/personalDataScreen.jsx";
+import Home from "./screens/HomeScreen.jsx";
+import Login from "./screens/LoginScreen.jsx";
+import Diary from "./screens/DiaryScreen.jsx";
+import SignUp from "./screens/SignUpScreen.jsx";
+import Contact from "./screens/ContactScreen.jsx";
+import Profile from "./screens/ProfileScreen.jsx";
+import Settings from "./screens/SettingsScreen.jsx";
+import AddDataDiary from "./screens/AddDataDiary.jsx";
+import PersonalData from "./screens/PersonalDataScreen.jsx";
+import SignUpInfos from "./screens/SignUpInfosScreen.jsx";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 AppRegistry.registerComponent(appName, () => App);
@@ -29,6 +30,11 @@ export default function App() {
             name="SignUp"
             component={SignUp}
             options={{ title: "Inscription" }}
+          />
+          <Stack.Screen
+            name="SignUpInfos"
+            component={SignUpInfos}
+            options={{ title: "Finalisation de l'inscription" }}
           />
           <Stack.Screen
             name="Login"

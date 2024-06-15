@@ -9,25 +9,25 @@ const Contact = ({ navigation }) => {
   const renderContactPro = () => (
     <View style={styles.contactList}>
       <TouchableOpacity style={styles.contactButton}>
-        <Image source={require("../assets/doctolib.png")} style={styles.logo} />
+        <Image source={require("../assets/img/doctolib.png")} style={styles.logo} />
         <Text style={styles.buttonText}>Doctolib</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
         <Image
-          source={require("../assets/mondocteur.png")}
+          source={require("../assets/img/mondocteur.png")}
           style={styles.logo}
         />
         <Text style={styles.buttonText}>Mondocteur</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
         <Image
-          source={require("../assets/therapeutes.jpeg")}
+          source={require("../assets/img/therapeutes.jpeg")}
           style={styles.logo}
         />
         <Text style={styles.buttonText}>Therapeute.com</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.contactButton}>
-        <Image source={require("../assets/resalib.png")} style={styles.logo} />
+        <Image source={require("../assets/img/resalib.png")} style={styles.logo} />
         <Text style={styles.buttonText}>Resalib</Text>
       </TouchableOpacity>
     </View>
