@@ -1,108 +1,159 @@
-import React, { useContext, useState } from 'react';
-import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { AuthContext } from './AuthProvider';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-
-const SignUpScreen = () => {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [gender, setGender] = useState('');
-  const [age, setAge] = useState('');
-  const [username, setUsername] = useState('');
+const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const { updateUserInfo } = useContext(AuthContext);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const navigation = navigation(); 
 
-  const handleSignUp = () => {
-    if (password !== passwordConfirm) {
-      Alert.alert("Error", "Passwords do not match.");
-      return;
-    }
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("User created:", userCredential.user);
-        navigation.navigate('HomeScreen'); // Naviguez vers HomeScreen après l'inscription réussie
-      })
-      .catch((error) => {
-        console.error("Error signing up:", error.message);
-        Alert.alert("Error", error.message); // Utilisez Alert pour afficher les erreurs
+  const navigation = useNavigation();
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const navigateToSignUpInfos = () => {
+    if (validateEmail() && validatePassword() && passwordsMatch()) {
+      navigation.navigate("SignUpInfos", {
+        email: email,
+        password: password,
       });
+    }
+  };
+
+  const validateEmail = () => {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (emailRegex.test(email)) {
+      setEmailError("");
+      return true;
+    } else {
+      setEmailError("Email invalide");
+      return false;
+    }
+  };
+
+  const validatePassword = () => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordRegex.test(password)) {
+      setPasswordError(
+        "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un chiffre et un caractère spécial"
+      );
+      return false;
+    } else {
+      setPasswordError("");
+      return true;
+    }
+  };
+
+  const passwordsMatch = () => {
+    if (password !== passwordConfirm) {
+      setPasswordError("Les mots de passe ne correspondent pas");
+      return false;
+    }
+    return true;
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        keyboardType="email-address"
-      />
-      {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
-      <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Age"
-        value={age}
-        onChangeText={setAge}
-        style={styles.input}
-        keyboardType="numeric"
-      />
-      <TextInput
-        placeholder="Gender"
-        value={gender}
-        onChangeText={setGender}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={!passwordVisible} 
-        style={styles.input}
-      />
-      {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
-      <TextInput
-        placeholder="Confirm Password"
-        value={passwordConfirm}
-        onChangeText={setPasswordConfirm}
-        secureTextEntry={!passwordVisible}
-        style={styles.input}
-      />
-      <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-        <Text>{passwordVisible ? "Hide Password" : "Show Password"}</Text>
-      </TouchableOpacity>
-      <Button title="Sign Up" onPress={() => { handleSignUp }} />
-    </View>
+    <SafeAreaView className="flex-1 bg-primary-green">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="items-center justify-center px-4 py-8 mb-3">
+          <Text className="text-5xl text-primary-beige font-wakExtraBold text-center w-64">
+            Inscription
+          </Text>
+          <Text className="text-xl text-primary-beige font-sansBold text-center mt-5">
+            Crée ton compte sur Bambou !
+          </Text>
+        </View>
+        <View className="flex bg-primary-beige h-full">
+          <View className="items-center p-12">
+            <Text className="text-primary-green font-sans text-lg self-start">
+              Email
+            </Text>
+            <TextInput
+              className={`font-sansBold w-80 bg-secondary-beige rounded-2xl p-4 ${
+                emailError ? "border-red-500 border-2 rounded-xl" : ""
+              }`}
+              onChangeText={setEmail}
+              value={email}
+              placeholder="Ton adresse mail"
+              onBlur={validateEmail}
+            />
+            {emailError && <Text className="text-red-500">{emailError}</Text>}
+            <Text className="text-primary-green font-sans text-lg self-start mt-5">
+              Mot de passe
+            </Text>
+            <View className="flex-row items-center w-80 bg-secondary-beige rounded-2xl">
+              <TextInput
+                className="flex-1 text-primary-green p-4 font-sansBold"
+                onChangeText={setPassword}
+                value={password}
+                placeholder="Ton mot de passe"
+                secureTextEntry={!passwordVisible}
+              />
+              <TouchableOpacity
+                onPress={togglePasswordVisibility}
+                style={{ padding: 10 }}
+              >
+                <Ionicons
+                  name={passwordVisible ? "eye-off-outline" : "eye-outline"}
+                  size={24}
+                  color="#005B41"
+                />
+              </TouchableOpacity>
+            </View>
+            {passwordError && (
+              <Text className="text-red-500">{passwordError}</Text>
+            )}
+            <Text className="text-primary-green font-sans text-lg self-start mt-5">
+              Confirmation du mot de passe
+            </Text>
+            <View className="flex-row items-center w-80 bg-secondary-beige rounded-2xl">
+              <TextInput
+                className="flex-1 text-primary-green p-4 font-sansBold"
+                onChangeText={setPasswordConfirm}
+                value={passwordConfirm}
+                placeholder="Confirme ton mot de passe"
+                secureTextEntry={!passwordVisible}
+              />
+              <TouchableOpacity
+                onPress={togglePasswordVisibility}
+                style={{ padding: 10 }}
+              >
+                <Ionicons
+                  name={passwordVisible ? "eye-off-outline" : "eye-outline"}
+                  size={24}
+                  color="#005B41"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+      <View className="w-full px-12 pb-6 bg-primary-beige">
+        <TouchableOpacity
+          className="bg-primary-yellow py-4 rounded-full items-center w-full"
+          onPress={navigateToSignUpInfos}
+        >
+          <Text className="text-primary-beige text-lg font-sansBold">
+            Suivant
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  input: {
-    marginBottom: 10,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-  },
-  error: {
-    color: 'red',
-    marginBottom: 10,
-  },
-});
-
-export default SignUpScreen;
+export default SignUp;

@@ -24,7 +24,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="SignUp">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
