@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Menu from "../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Diary = ({ navigation }) => {
   return (
@@ -23,7 +24,10 @@ const Diary = ({ navigation }) => {
 
       <ScrollView contentContainerStyle={styles.diaryList}>
         <Text style={styles.title}>Journaux</Text>
-        <View style={styles.diaryEntry}>
+        <LinearGradient
+          colors={["#3F317E", "#7259E4"]}
+          style={styles.diaryEntry}
+        >
           <View style={styles.entryTextContainer}>
             <Text style={styles.entryDate}>16/01/2024</Text>
             <Text style={styles.entryText}>
@@ -36,8 +40,11 @@ const Diary = ({ navigation }) => {
             color="#fff"
             style={styles.entryIcon}
           />
-        </View>
-        <View style={styles.diaryEntry}>
+        </LinearGradient>
+        <LinearGradient
+          colors={["#3F317E", "#7259E4"]}
+          style={styles.diaryEntry}
+        >
           <View style={styles.entryTextContainer}>
             <Text style={styles.entryDate}>16/01/2024</Text>
             <Text style={styles.entryText}>
@@ -50,7 +57,7 @@ const Diary = ({ navigation }) => {
             color="#fff"
             style={styles.entryIcon}
           />
-        </View>
+        </LinearGradient>
       </ScrollView>
 
       <View style={styles.fabContainer}>
@@ -95,7 +102,6 @@ const styles = StyleSheet.create({
   },
   diaryEntry: {
     flexDirection: "row",
-    backgroundColor: "#3F317E",
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
@@ -118,7 +124,7 @@ const styles = StyleSheet.create({
   fabContainer: {
     position: "absolute",
     right: 20,
-    bottom: 90, 
+    bottom: 90,
     zIndex: 10,
   },
   fab: {
