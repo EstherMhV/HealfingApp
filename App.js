@@ -12,6 +12,7 @@ import Contact from "./screens/contactScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
+import DailyMissions from "./screens/DailyMissions.jsx";
 import Chargement from "./screens/chargementScreen.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
 import ArtTherapy from "./screens/exercices/ArtTherapyScreen.jsx";
@@ -29,7 +30,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Chargement">
+        <Stack.Navigator initialRouteName="DailyMissions">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -44,6 +45,11 @@ export default function App() {
             name="Home"
             component={Home}
             options={{ title: "Home" }}
+          />
+          <Stack.Screen
+            name="DailyMissions"
+            component={DailyMissions}
+            options={{ title: "Missions quotidiennes" }}
           />
           <Stack.Screen
             name="News"

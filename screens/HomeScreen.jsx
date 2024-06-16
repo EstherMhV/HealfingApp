@@ -1,4 +1,4 @@
-
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   ScrollView,
   Animated,
 } from "react-native";
-import { useState, useRef } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import Menu from "../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -64,10 +64,20 @@ const Home = ({ navigation }) => {
           <View style={styles.separatorLine} />
         </View>
 
-        <View style={styles.dailyQuoteContainer}>
-          <Text style={styles.dailyQuoteText}>Mission du jour</Text>
-          <Text style={styles.dailyQuoteXP}>nb XP</Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("DailyMissions")}
+          style={styles.dailyQuoteContainer}
+        >
+          <LinearGradient
+            colors={["#3F317E", "#7259E4"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.gradient}
+          >
+            <Text style={styles.dailyQuoteText}>Mission du jour</Text>
+            <Text style={styles.dailyQuoteXP}>nb XP</Text>
+          </LinearGradient>
+        </TouchableOpacity>
 
         <Text style={styles.sectionTitle}>Actu du jour</Text>
         <View style={styles.newsContainer}>
@@ -194,12 +204,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   dailyQuoteContainer: {
+    marginBottom: 20,
+  },
+  gradient: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#7259E4",
-    borderRadius: 10,
+    alignItems: "center",
     padding: 20,
-    marginBottom: 20,
+    borderRadius: 10,
   },
   dailyQuoteText: {
     color: "#fff",
@@ -244,5 +256,3 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
-
-
