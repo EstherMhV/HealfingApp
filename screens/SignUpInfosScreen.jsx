@@ -8,15 +8,18 @@ import { Timestamp, doc, getFirestore, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import DatePicker from 'react-native-datepicker'; 
+import {Picker} from '@react-native-picker/picker';
 import { app } from "../firebaseConfig";
 
 const db = getFirestore(app);
 
-const SignUpName = ({ route }) => {
+const SignUpInfosScreen = ({ route }) => {
   const { email, password } = route.params;
   const [username, setUsername] = useState("");
-  const [gender, setGender ] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [birthDate, setBirthDate] = React.useState(new Date());
+  const [gender, setGender] = React.useState('');
+
   const navigation = useNavigation();
 
   const createAccount = () => {
@@ -95,23 +98,20 @@ const SignUpName = ({ route }) => {
         </View>
         
 
+        <View>
           <Text style={styles.titles}>
             Renseigne ta date de naissance !
           </Text>
-        <View style={styles.inputContainer}>
-            <TextInput
-              placeholderTextColor="#E6E0F0"
-              style={styles.input}
-              placeholder="Date de naissance"
-              onChangeText={setBirthDate}
-              value={birthDate}
-            />
-        </View>
+          <DatePicker
+            date={birthDate}
+            onDateChange={setBirthDate}
+            mode="date"
+            locale="fr" // Set locale to French, adjust as needed
+          /> 
 
-
-            <Text style={styles.titles}>
-              Quel est ton pseudo ?
-            </Text>
+          <Text style={styles.titles}>
+            Quel est ton pseudo ?
+          </Text>
           <View style={styles.inputContainer}>  
             <TextInput
               placeholderTextColor="#E6E0F0"
@@ -124,17 +124,19 @@ const SignUpName = ({ route }) => {
 
 
 
-            <Text  style={styles.titles}>
-              Quel est ton genre ?
-            </Text>
-          <View style={styles.inputContainer}>
-            <TextInput
-              placeholderTextColor="#E6E0F0"
-              style={styles.input}
-              placeholder="Ton pseudo"
-              onChangeText={setGender}
-              value={gender}
-            />
+          <Text style={styles.titles}>
+            Quel est ton genre ?
+          </Text>
+          <Picker
+            selectedValue={gender}
+            style={{height: 50, width: 100}}
+            onValueChange={(itemValue, itemIndex) =>
+              setGender(itemValue)
+            }>
+            <Picker.Item label="Femme" value="femme" />
+            <Picker.Item label="Homme" value="homme" />
+            <Picker.Item label="Autre" value="autre" />
+          </Picker>
           </View>
           </View>
           <View className="w-full px-12 py-12 mt-56">
@@ -224,4 +226,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpName;
+export default SignUpInfosScreen;

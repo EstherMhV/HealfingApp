@@ -1,4 +1,4 @@
-import React, { useContext, useState, useLayoutEffect } from 'react';
+import React, { useContext, useState, useLayoutEffect, useRef } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet,Dimensions } from 'react-native';
 
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
@@ -21,7 +21,7 @@ function Header() {
 
 const SignUpScreen = () => {
 
-
+  const fadeAnim = useRef(new Animated.Value(0)).current; 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
