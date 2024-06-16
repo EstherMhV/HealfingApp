@@ -12,6 +12,7 @@ import Contact from "./screens/contactScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
+import Chargement from "./screens/chargementScreen.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
 import ArtTherapy from "./screens/exercices/ArtTherapyScreen.jsx";
 import Meditation from "./screens/exercices/meditationScreen.jsx";
@@ -28,7 +29,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="News">
+        <Stack.Navigator initialRouteName="Chargement">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -78,6 +79,11 @@ export default function App() {
             name="personalData"
             component={PersonalData}
             options={{ title: "Informations personnelles" }}
+          />
+          <Stack.Screen
+            name="Chargement"
+            component={Chargement}
+            options={{ title: "Chargement" }}
           />
           <Stack.Screen
             name="Error 404"
