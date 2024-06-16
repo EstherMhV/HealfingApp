@@ -1,63 +1,71 @@
-import { useNavigation } from "@react-navigation/native";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  updateProfile,
-} from "firebase/auth";
-import { Timestamp, doc, getFirestore, setDoc } from "firebase/firestore";
+import { getApps } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { Timestamp, doc, setDoc, getFirestore } from "firebase/firestore";
+import firestore from '@react-native-firebase/firestore';
 import React, { useState } from "react";
-import { Alert, Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import DatePicker from 'react-native-datepicker'; 
-import {Picker} from '@react-native-picker/picker';
-import { app } from "../firebaseConfig";
+import {
+  Alert,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+} from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { Picker } from "@react-native-picker/picker";
+import { useNavigation } from "@react-navigation/native";
+import { app, auth } from "../firebaseConfig";
 
-const db = getFirestore(app);
+
 
 const SignUpInfosScreen = ({ route }) => {
+  const navigation = useNavigation();
   const { email, password } = route.params;
   const [username, setUsername] = useState("");
-  const [birthDate, setBirthDate] = React.useState(new Date());
-  const [gender, setGender] = React.useState('');
+  const [birthdate, setBirthdate] = useState(new Date());
+  const [gender, setGender] = useState("");
 
-  const navigation = useNavigation();
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const handleDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || new Date();
+    setDatePickerVisibility(Platform.OS === 'ios');
+    setBirthdate(currentDate);
+  };
 
   const createAccount = () => {
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-      
         updateProfile(user, {
           displayName: username,
         })
           .then(() => {
-            // Une fois que le profil est mis à jour, ajoute les informations de l'utilisateur à la base de données
-            const userDoc = doc(db, "users", user.uid);
-            setDoc(userDoc, {
-              email: email,
-              username: username,
-              bithday: birthDate,
-              role: "user",
-              XP: 0,
-              level: 1,
-              profilePic:
-                "https://firebasestorage.googleapis.com/v0/b/bambou-5e77d.appspot.com/o/profilePictures%2FprofilePic.png?alt=media&token=cb84ae21-80db-4ebf-b85f-3f63271ba236",
-              joinedAt: Timestamp.now(),
-              isPremium: false,
-              createdAt: Timestamp.now(),
-              updatedAt: Timestamp.now(),
-
-            })
+            const usersCollection = firestore().collection('users');
+            usersCollection
+              .doc(user.uid)
+              .add({
+                email: email,
+                username: username,
+                gender: gender,
+                birthdate: birthdate,
+                xp: 0,
+                level: 1,
+                profilePic:
+                  "https://firebasestorage.googleapis.com/v0/b/healfing-53eb3.appspot.com/o/lH4rlDKb_400x400.jpg?alt=media&token=5d17bc46-ae80-4e19-90c2-a30eeb06b919",
+                isPremium: false,
+                createdAt: Timestamp.now(),
+                updatedAt: Timestamp.now(),
+              })
               .then(() => {
-                
-                navigation.navigate("Loggin");
+                console.log("Utilisateur enregistré avec succès !");
+                navigation.navigate("Home");
               })
               .catch((error) => {
-                console.error(
-                  "Erreur lors de l'enregistrement des données utilisateur :",
-                  error
-                );
+                console.error("Erreur lors de l'enregistrement des données utilisateur :", error);
                 Alert.alert(
                   "Erreur",
                   "Une erreur s'est produite lors de l'enregistrement des données utilisateur."
@@ -65,19 +73,17 @@ const SignUpInfosScreen = ({ route }) => {
               });
           })
           .catch((error) => {
-            console.error("Erreur lors de la mise à jour du profil :", error);
+            const errorMessage = error.message;
+            console.error("Erreur lors de la mise à jour du profil de l'utilisateur :", errorMessage);
             Alert.alert(
               "Erreur",
-              "Une erreur s'est produite lors de la mise à jour du profil."
+              "Une erreur s'est produite lors de la mise à jour du profil de l'utilisateur."
             );
           });
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.error(
-          "Erreur lors de la création de l'utilisateur :",
-          errorMessage
-        );
+        console.error("Erreur lors de la création de l'utilisateur :", errorMessage);
         Alert.alert(
           "Erreur",
           "Une erreur s'est produite lors de la création de l'utilisateur."
@@ -86,33 +92,29 @@ const SignUpInfosScreen = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.background}>
+    <View style={styles.background}>
       <View style={styles.container}>
-        <View >
-          <Text style={styles.titles}>
-            Dernière étape
-          </Text>
-          <Text style={styles.titles}>
-            Rempli le formulaire ci-dessous pour terminer ton inscription
-          </Text>
-        </View>
-        
-
         <View>
-          <Text style={styles.titles}>
-            Renseigne ta date de naissance !
-          </Text>
-          <DatePicker
-            date={birthDate}
-            onDateChange={setBirthDate}
-            mode="date"
-            locale="fr" // Set locale to French, adjust as needed
-          /> 
-
-          <Text style={styles.titles}>
-            Quel est ton pseudo ?
-          </Text>
-          <View style={styles.inputContainer}>  
+          <Text style={styles.titles}>Dernière étape</Text>
+          <Text style={styles.titles}>Rempli le formulaire ci-dessous pour terminer ton inscription</Text>
+        </View>
+        <View>
+          <Text style={styles.titles}>Renseigne ta date de naissance !</Text>
+          <View style={styles.inputContainer}>
+            <TouchableOpacity onPress={showDatePicker}>
+              <Text>Date !</Text>
+            </TouchableOpacity>
+            <DateTimePicker
+              testID="dateTimePicker"
+              mode="date"
+              is24Hour={true}
+              display="spinner"
+              value={birthdate}
+              onChange={handleDateChange}
+            />
+          </View>
+          <Text style={styles.titles}>Quel est ton pseudo ?</Text>
+          <View style={styles.inputContainer}>
             <TextInput
               placeholderTextColor="#E6E0F0"
               style={styles.input}
@@ -121,33 +123,24 @@ const SignUpInfosScreen = ({ route }) => {
               value={username}
             />
           </View>
-
-
-
-          <Text style={styles.titles}>
-            Quel est ton genre ?
-          </Text>
-          <Picker
-            selectedValue={gender}
-            style={{height: 50, width: 100}}
-            onValueChange={(itemValue, itemIndex) =>
-              setGender(itemValue)
-            }>
-            <Picker.Item label="Femme" value="femme" />
-            <Picker.Item label="Homme" value="homme" />
-            <Picker.Item label="Autre" value="autre" />
-          </Picker>
+          <Text style={styles.titles}>Quel est ton genre ?</Text>
+          <View style={styles.inputContainer}>
+            <Picker
+              selectedValue={gender}
+              style={{ height: 50, width: 150, color: "#E6E0F0" }}
+              onValueChange={(itemValue) => setGender(itemValue)}
+            >
+              <Picker.Item label="Femme" value="femme" />
+              <Picker.Item label="Homme" value="homme" />
+              <Picker.Item label="Autre" value="autre" />
+            </Picker>
           </View>
-          </View>
-          <View className="w-full px-12 py-12 mt-56">
-           
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}  onPress={createAccount}>Creer un Compte</Text>
-            
-          </TouchableOpacity>
-          
-          </View>
-    </SafeAreaView>
+        </View>
+      </View>
+      <TouchableOpacity style={styles.button} onPress={createAccount}>
+        <Text style={styles.buttonText}>Creer un Compte</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -168,12 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 30,
   },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 40,
-    resizeMode: "contain",
-  },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -183,9 +170,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginVertical: 10,
   },
-  icon: {
-    marginRight: 10,
-  },
   input: {
     flex: 1,
     height: 50,
@@ -194,7 +178,7 @@ const styles = StyleSheet.create({
   button: {
     width: "100%",
     height: 50,
-    backgroundColor: "#B8F8FF",
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
@@ -204,25 +188,6 @@ const styles = StyleSheet.create({
     color: "#120B2D",
     fontSize: 18,
     fontWeight: "bold",
-  },
-
-  linkText: {
-    color: "#fff",
-    marginVertical: 10,
-  },
-  forgetPasswordsLink: {
-    color: "#fff",
-    marginVertical: 10,
-    textDecorationLine: "underline",
-  },
-  socialText: {
-    color: "#fff",
-    marginVertical: 10,
-  },
-  socialContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "50%",
   },
 });
 

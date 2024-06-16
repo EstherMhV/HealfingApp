@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "430066522321",
+    "firebase_url": "https://healfing-53eb3-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "healfing-53eb3",
+    "storage_bucket": "healfing-53eb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430066522321:android:cb54209a6ce462722b0df0",
+        "android_client_info": {
+          "package_name": "com.healfing.package"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0qlsmlnvuKux85Xy7ZCqU0w2qI7a_GLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

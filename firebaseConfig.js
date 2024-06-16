@@ -1,7 +1,7 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { initializeApp } from "firebase/app";
-import { getReactNativePersistence, initializeAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getReactNativePersistence, initializeAuth, getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Optionally import the services that you want to use
 // import {...} from "firebase/auth";
@@ -12,22 +12,20 @@ import { getFirestore } from "firebase/firestore";
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: ' AIzaSyD0qlsmlnvuKux85Xy7ZCqU0w2qI7a_GLY',
+  apiKey: 'AIzaSyD0qlsmlnvuKux85Xy7ZCqU0w2qI7a_GLY',
   authDomain: '1:430066522321:android:cb54209a6ce462722b0df0.firebaseapp.com',
-  databaseURL: 'https://project-id.firebaseio.com',
-  projectId: '1:430066522321:android:cb54209a6ce462722b0df0',
+  databaseURL: 'https://healfing-53eb30.firebaseio.com',
+  projectId: 'healfing-53eb30',
   storageBucket: '1:430066522321:android:cb54209a6ce462722b0df0.appspot.com',
   messagingSenderId: '430066522321',
-  appId: 'healfing-53eb3',
-  measurementId: 'G-measurement-id',
+  appId: '1:430066522321:android:cb54209a6ce462722b0df0',
 };
 
+
 const app = initializeApp(firebaseConfig);
-
 const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage),
+  persistence: getReactNativePersistence(AsyncStorage)
 });
-
 const db = getFirestore(app);
 
 export { app, auth, db };

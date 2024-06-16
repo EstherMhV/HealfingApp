@@ -5,6 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 
+import { app } from './firebaseConfig';
+
 
 import Home from "./screens/HomeScreen.jsx";
 import Login from "./screens/LoginScreen.jsx";
