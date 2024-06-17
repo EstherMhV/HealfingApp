@@ -13,18 +13,19 @@ import Contact from "./screens/contactScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
-import DailyMissions from "./screens/DailyMissions.jsx";
+import DailyMissions from "./screens/dailyMissions.jsx";
 import Chargement from "./screens/chargementScreen.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
 import Exercice from "./screens/exercices/_id/exercice_id.jsx";
-import ArtTherapy from "./screens/exercices/ArtTherapyScreen.jsx";
+import ExerciceGo from "./screens/exercices/_id/exercice_go.jsx";
+import ArtTherapy from "./screens/exercices/artTherapyScreen.jsx";
 import Meditation from "./screens/exercices/meditationScreen.jsx";
 import CategoriesExercices from "./screens/categoriesExercices.jsx";
-import Mindfulness from "./screens/exercices/MindfulnessScreen.jsx";
-import DeepBreathing from "./screens/exercices/DeepBreathingScreen.jsx";
-import MuscleRelaxation from "./screens/exercices/MuscleRelaxationScreen.jsx";
-import SensoryAnchoring from "./screens/exercices/SensoryAnchoringScreen.jsx";
-import AuditoryRelaxation from "./screens/exercices/AuditoryRelaxationScreen.jsx";
+import Mindfulness from "./screens/exercices/mindfulnessScreen.jsx";
+import DeepBreathing from "./screens/exercices/deepBreathingScreen.jsx";
+import MuscleRelaxation from "./screens/exercices/muscleRelaxationScreen.jsx";
+import SensoryAnchoring from "./screens/exercices/sensoryAnchoringScreen.jsx";
+import AuditoryRelaxation from "./screens/exercices/auditoryRelaxationScreen.jsx";
 
 const Stack = createStackNavigator();
 
@@ -32,7 +33,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Exercice">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -57,6 +58,11 @@ export default function App() {
             name="Exercice"
             component={Exercice}
             options={{ title: "Exercice" }}
+          />
+          <Stack.Screen
+            name="ExerciceGo"
+            component={ExerciceGo}
+            options={{ title: "Exercice go" }}
           />
           <Stack.Screen
             name="News"

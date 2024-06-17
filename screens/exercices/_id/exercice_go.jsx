@@ -9,11 +9,11 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Menu from "../../../components/Menu.jsx";
 
-const Exercice = ({ navigation }) => {
+const ExerciceGo = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack("Home")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Exercice")}>
           <Ionicons name="arrow-back-outline" size={30} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity>
@@ -28,19 +28,16 @@ const Exercice = ({ navigation }) => {
           style={styles.image}
           resizeMode="contain"
         />
-        <Text style={styles.duration}>10 mn</Text>
-        <Text style={styles.xp}>50 XP</Text>
-        <Text style={styles.description}>
-          Détendez-vous progressivement muscles par muscles.{"\n"}
-          Respirez profondément et concentrez-vous sur chaque partie du corps.
-          {"\n"}
-          Contractez puis relâchez chaque groupe musculaire.{"\n"}
-          Ressentez la tension se dissiper doucement.{"\n"}
-          Finissez en état de calme profond.
+        <Text style={styles.stepTitle}>1. Préparation (1 minute) :</Text>
+        <Text style={styles.stepDescription}>
+          • Asseyez-vous confortablement dans un endroit calme.{"\n"}• Fermez
+          les yeux et prenez quelques respirations profondes pour vous détendre.
         </Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Commencer</Text>
-        </TouchableOpacity>
+        <Image
+          source={require("../../../assets/meditation.png")}
+          style={styles.image}
+          resizeMode="contain"
+        />
       </ScrollView>
 
       <View style={styles.footer}>
@@ -77,38 +74,22 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: undefined,
-    aspectRatio: 1,
+    height: 200,
+    borderRadius: 10,
     marginBottom: 20,
   },
-  duration: {
+  stepTitle: {
     color: "#fff",
-    fontSize: 16,
-    marginVertical: 10,
+    fontSize: 18,
+    fontWeight: "bold",
     textAlign: "center",
+    marginBottom: 10,
   },
-  xp: {
-    color: "#fff",
-    fontSize: 16,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  description: {
+  stepDescription: {
     color: "#fff",
     fontSize: 14,
     textAlign: "justify",
     marginBottom: 20,
-  },
-  button: {
-    backgroundColor: "#B8F8FF",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "#120B2D",
-    fontSize: 16,
-    fontWeight: "bold",
   },
   footer: {
     backgroundColor: "#3F317E",
@@ -116,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Exercice;
+export default ExerciceGo;
