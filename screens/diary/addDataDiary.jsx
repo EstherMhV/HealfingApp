@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useState } from "react";
-import Menu from "../components/Menu.jsx";
+import Menu from "../../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 

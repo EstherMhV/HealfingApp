@@ -1,10 +1,15 @@
+import {
+  View,
+  TextInput,
+  Image,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState, useRef, useLayoutEffect } from 'react';
-import { View, TextInput, Image, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-
-
-
+import { useState, useRef, useLayoutEffect } from "react";
 
 function Header() {
   return (
@@ -16,7 +21,7 @@ function Header() {
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -71,13 +76,12 @@ const SignUpScreen = () => {
     return true;
   };
 
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: '#3F317E',
+        backgroundColor: "#3F317E",
       },
-      headerTintColor: '#fff',
+      headerTintColor: "#fff",
       headerTitleStyle: {
         marginLeft: 20,
       },
@@ -89,11 +93,16 @@ const SignUpScreen = () => {
     <View style={styles.background}>
       <View style={styles.container}>
         <Image
-          source={require('../assets/logo.png')}
+          source={require("../../assets/logo.png")}
           style={{ width: 200, height: 200, marginBottom: 20 }}
         />
         <View style={styles.inputContainer}>
-          <Ionicons name="mail-outline" size={30} color="#fff" style={styles.icon} />
+          <Ionicons
+            name="mail-outline"
+            size={30}
+            color="#fff"
+            style={styles.icon}
+          />
           <TextInput
             placeholder="Email"
             value={email}
@@ -103,7 +112,12 @@ const SignUpScreen = () => {
           {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
         </View>
         <View style={styles.inputContainer}>
-          <Ionicons name="lock-closed-outline" size={30} color="#fff" style={styles.icon} />
+          <Ionicons
+            name="lock-closed-outline"
+            size={30}
+            color="#fff"
+            style={styles.icon}
+          />
           <TextInput
             placeholder="Password"
             value={password}
@@ -120,9 +134,16 @@ const SignUpScreen = () => {
             />
           </TouchableOpacity>
         </View>
-        {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
+        {passwordError ? (
+          <Text style={styles.error}>{passwordError}</Text>
+        ) : null}
         <View style={styles.inputContainer}>
-          <Ionicons name="lock-closed-outline" size={30} color="#fff" style={styles.icon} />
+          <Ionicons
+            name="lock-closed-outline"
+            size={30}
+            color="#fff"
+            style={styles.icon}
+          />
           <TextInput
             placeholder="Confirm Password"
             value={passwordConfirm}
@@ -132,7 +153,10 @@ const SignUpScreen = () => {
           />
         </View>
         {error ? <Text style={styles.error}>{error}</Text> : null}
-        <TouchableOpacity style={styles.button} onPress={navigateToSignUpInfosScreen}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={navigateToSignUpInfosScreen}
+        >
           <Text style={styles.buttonText}>S'inscrire</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
@@ -215,7 +239,7 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   error: {
-    color: 'red',
+    color: "red",
     marginTop: 10,
   },
 });

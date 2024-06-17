@@ -12,7 +12,7 @@ const Login = ({ navigation }) => {
   return (
     <View style={styles.background}>
       <View style={styles.container}>
-        <Image source={require("../assets/logo.png")} style={styles.logo} />
+        <Image source={require("../../assets/logo.png")} style={styles.logo} />
 
         <View style={styles.inputContainer}>
           <Ionicons

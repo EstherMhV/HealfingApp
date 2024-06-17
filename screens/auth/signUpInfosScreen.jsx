@@ -13,12 +13,10 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 const SignUpInfosScreen = ({ route }) => {
   const navigation = useNavigation();
-  const { email, password } = route.params;
+  const { email, password } = useState("");
   const [username, setUsername] = useState("");
   const [birthdate, setBirthdate] = useState(new Date());
   const [gender, setGender] = useState("");
-
-
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || new Date();
@@ -31,10 +29,10 @@ const SignUpInfosScreen = ({ route }) => {
       return;
     }
 
-    fetch('https://healfing-68534dd214c6.herokuapp.com/users/create', {
-      method: 'POST',
+    fetch("https://healfing-68534dd214c6.herokuapp.com/users/create", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
@@ -47,21 +45,27 @@ const SignUpInfosScreen = ({ route }) => {
         level: 1,
       }),
     })
-      .then(async response => {
+      .then(async (response) => {
         if (response.ok) {
           return response.json();
         } else {
           // Récupérer le corps de la réponse pour obtenir les détails de l'erreur
           const err = await response.json();
-          throw new Error('Une erreur s\'est produite lors de la création du compte: ' + (err.message || response.statusText));
+          throw new Error(
+            "Une erreur s'est produite lors de la création du compte: " +
+              (err.message || response.statusText)
+          );
         }
       })
-      .then(data => {
+      .then((data) => {
         console.log("Utilisateur enregistré avec succès !", data);
         navigation.navigate("Home");
       })
       .catch((error) => {
-        console.error("Erreur lors de l'enregistrement des données utilisateur :", error);
+        console.error(
+          "Erreur lors de l'enregistrement des données utilisateur :",
+          error
+        );
         Alert.alert("Erreur", error.message);
       });
   };
@@ -78,7 +82,7 @@ const SignUpInfosScreen = ({ route }) => {
         <View>
           <Text style={styles.titles}>Renseigne ta date de naissance !</Text>
           <View style={styles.inputContainer}>
-            <TouchableOpacity >
+            <TouchableOpacity>
               <Text>Date !</Text>
             </TouchableOpacity>
 
@@ -90,7 +94,6 @@ const SignUpInfosScreen = ({ route }) => {
               value={birthdate}
               onChange={handleDateChange}
             />
-
           </View>
           <Text style={styles.titles}>Quel est ton pseudo ?</Text>
           <View style={styles.inputContainer}>

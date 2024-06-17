@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Menu from "../components/Menu.jsx";
+import Menu from "../../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -14,43 +14,43 @@ const CategoriesExercices = ({ navigation }) => {
   const categories = [
     {
       title: "Méditation",
-      image: require("../assets/meditation.png"),
+      image: require("../../assets/meditation.png"),
       exercises: "06 Exercices",
       navigateTo: "Meditation",
     },
     {
       title: "Respir. profonde",
-      image: require("../assets/meditation.png"),
+      image: require("../../assets/meditation.png"),
       exercises: "06 Exercices",
       navigateTo: "DeepBreathing",
     },
     {
       title: "Relax. musculaire",
-      image: require("../assets/meditation.png"),
+      image: require("../../assets/meditation.png"),
       exercises: "06 Exercices",
       navigateTo: "MuscleRelaxation",
     },
     {
       title: "Pleine conscience",
-      image: require("../assets/meditation.png"),
+      image: require("../../assets/meditation.png"),
       exercises: "06 Exercices",
       navigateTo: "Mindfulness",
     },
     {
       title: "Ancrage sensoriel",
-      image: require("../assets/meditation.png"),
+      image: require("../../assets/meditation.png"),
       exercises: "06 Exercices",
       navigateTo: "SensoryAnchoring",
     },
     {
       title: "Relax. auditive",
-      image: require("../assets/meditation.png"),
+      image: require("../../assets/meditation.png"),
       exercises: "06 Exercices",
       navigateTo: "AuditoryRelaxation",
     },
     {
       title: "Art thérapie",
-      image: require("../assets/meditation.png"),
+      image: require("../../assets/meditation.png"),
       exercises: "06 Exercices",
       navigateTo: "ArtTherapy",
     },
