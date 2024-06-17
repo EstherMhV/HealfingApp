@@ -1,6 +1,6 @@
 {
   "name": "healfing_app",
-  "main": "expo-router/entry",
+  "main": "src/server.js",
   "version": "1.0.0",
   "scripts": {
     "start": "node src/server.js",
