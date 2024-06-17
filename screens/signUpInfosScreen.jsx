@@ -18,79 +18,51 @@ const SignUpInfosScreen = ({ route }) => {
   const [birthdate, setBirthdate] = useState(new Date());
   const [gender, setGender] = useState("");
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
+
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || new Date();
-    setDatePickerVisibility(Platform.OS === "ios");
     setBirthdate(currentDate);
   };
 
   const createAccount = () => {
-    const auth = getAuth(app);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(`birthdate: ${birthdate}, gender: ${gender}`);
-        const user = userCredential.user;
-        updateProfile(user, {
-          displayName: username,
-        })
-          .then(() => {
-            const usersCollection = firestore().collection("users");
-            usersCollection
-              .doc(user.uid)
-              .add({
-                email: email,
-                username: username,
-                gender: gender,
-                birthdate: birthdate,
-                xp: 0,
-                level: 1,
-                profilePic:
-                  "https://firebasestorage.googleapis.com/v0/b/healfing-53eb3.appspot.com/o/lH4rlDKb_400x400.jpg?alt=media&token=5d17bc46-ae80-4e19-90c2-a30eeb06b919",
-                isPremium: false,
-                createdAt: Timestamp.now(),
-                updatedAt: Timestamp.now(),
-              })
-              .then(() => {
-                console.log("Utilisateur enregistré avec succès !");
-                navigation.navigate("Home");
-              })
-              .catch((error) => {
-                console.error(
-                  "Erreur lors de l'enregistrement des données utilisateur :",
-                  error
-                );
-                Alert.alert(
-                  "Erreur",
-                  "Une erreur s'est produite lors de l'enregistrement des données utilisateur."
-                );
-              });
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            console.error(
-              "Erreur lors de la mise à jour du profil de l'utilisateur :",
-              errorMessage
-            );
-            Alert.alert(
-              "Erreur",
-              "Une erreur s'est produite lors de la mise à jour du profil de l'utilisateur."
-            );
-          });
+    if (!email || !username) {
+      Alert.alert("Erreur", "Email et nom d'utilisateur sont requis.");
+      return;
+    }
+
+    fetch('https://healfing-68534dd214c6.herokuapp.com/users/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        username: username,
+        password: password,
+        gender: gender,
+        birthdate: birthdate,
+        role: "user",
+        xp: 0,
+        level: 1,
+      }),
+    })
+      .then(async response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          // Récupérer le corps de la réponse pour obtenir les détails de l'erreur
+          const err = await response.json();
+          throw new Error('Une erreur s\'est produite lors de la création du compte: ' + (err.message || response.statusText));
+        }
+      })
+      .then(data => {
+        console.log("Utilisateur enregistré avec succès !", data);
+        navigation.navigate("Home");
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        console.error(
-          "Erreur lors de la création de l'utilisateur :",
-          errorMessage
-        );
-        Alert.alert(
-          "Erreur",
-          "Une erreur s'est produite lors de la création de l'utilisateur."
-        );
+        console.error("Erreur lors de l'enregistrement des données utilisateur :", error);
+        Alert.alert("Erreur", error.message);
       });
   };
 
@@ -106,9 +78,10 @@ const SignUpInfosScreen = ({ route }) => {
         <View>
           <Text style={styles.titles}>Renseigne ta date de naissance !</Text>
           <View style={styles.inputContainer}>
-            <TouchableOpacity onPress={showDatePicker}>
+            <TouchableOpacity >
               <Text>Date !</Text>
             </TouchableOpacity>
+
             <DateTimePicker
               testID="dateTimePicker"
               mode="date"
@@ -117,6 +90,7 @@ const SignUpInfosScreen = ({ route }) => {
               value={birthdate}
               onChange={handleDateChange}
             />
+
           </View>
           <Text style={styles.titles}>Quel est ton pseudo ?</Text>
           <View style={styles.inputContainer}>
