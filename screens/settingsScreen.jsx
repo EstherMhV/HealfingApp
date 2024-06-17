@@ -82,7 +82,7 @@ const Settings = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.option}
-          onPress={() => navigation.navigate("")}
+          onPress={() => navigation.navigate("Login")}
         >
           <Ionicons name="exit-outline" size={24} color="#f00" />
           <Text style={styles.optionTextLogout}>Déconnexion</Text>

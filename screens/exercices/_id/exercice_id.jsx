@@ -39,7 +39,7 @@ const Exercice = ({ navigation }) => {
           Finissez en état de calme profond.
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.goBack("ExerciceGo")}
+          onPress={() => navigation.navigate("ExerciceGo")}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Commencer</Text>

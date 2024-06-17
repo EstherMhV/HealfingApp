@@ -7,23 +7,27 @@ import News from "./screens/newsScreen.jsx";
 import Error404 from "./screens/error404.jsx";
 import Login from "./screens/loginScreen.jsx";
 import Diary from "./screens/diaryScreen.jsx";
-
 import SignUp from "./screens/signUpScreen.jsx";
-import SignUpInfos from "./screens/signUpInfosScreen.jsx";
 import Contact from "./screens/contactScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
 import DailyMissions from "./screens/dailyMissions.jsx";
 import Chargement from "./screens/chargementScreen.jsx";
-import PersonalData from "./screens/personalDataScreen.jsx";
+import ReportBug from "./screens/settings/ReportBug.jsx";
+import SignUpInfos from "./screens/signUpInfosScreen.jsx";
+import Notification from "./screens/settings/Notification.jsx";
 import Exercice from "./screens/exercices/_id/exercice_id.jsx";
 import ExerciceGo from "./screens/exercices/_id/exercice_go.jsx";
+import PrivacyPolicy from "./screens/settings/privacyPolicy.jsx";
 import ArtTherapy from "./screens/exercices/artTherapyScreen.jsx";
 import Meditation from "./screens/exercices/meditationScreen.jsx";
 import CategoriesExercices from "./screens/categoriesExercices.jsx";
 import Mindfulness from "./screens/exercices/mindfulnessScreen.jsx";
+import ActivityHistory from "./screens/settings/actvityHistory.jsx";
+import PersonalData from "./screens/settings/personalDataScreen.jsx";
 import DeepBreathing from "./screens/exercices/deepBreathingScreen.jsx";
+import PasswordSecurity from "./screens/settings/passwordSecurity.jsx";
 import MuscleRelaxation from "./screens/exercices/muscleRelaxationScreen.jsx";
 import SensoryAnchoring from "./screens/exercices/sensoryAnchoringScreen.jsx";
 import AuditoryRelaxation from "./screens/exercices/auditoryRelaxationScreen.jsx";
@@ -99,6 +103,31 @@ export default function App() {
             name="Settings"
             component={Settings}
             options={{ title: "Paramètres" }}
+          />
+          <Stack.Screen
+            name="PasswordSecurity"
+            component={PasswordSecurity}
+            options={{ title: "Mot de passe et security" }}
+          />
+          <Stack.Screen
+            name="Notification"
+            component={Notification}
+            options={{ title: "Notification" }}
+          />
+          <Stack.Screen
+            name="ActivityHistory"
+            component={ActivityHistory}
+            options={{ title: "Historique d'activité" }}
+          />
+          <Stack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicy}
+            options={{ title: "Politique de confidentialité" }}
+          />
+          <Stack.Screen
+            name="ReportBug"
+            component={ReportBug}
+            options={{ title: "Signaler un bug" }}
           />
           <Stack.Screen
             name="personalData"

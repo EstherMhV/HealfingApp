@@ -1,4 +1,4 @@
-import Menu from "../components/Menu.jsx";
+import Menu from "../../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
@@ -13,6 +13,18 @@ const PersonalData = ({ navigation }) => {
       <Text style={styles.title}>Informations personnelles</Text>
 
       <View style={styles.infoContainer}>
+      <View style={styles.infoRow}>
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoLabel}>Pseudo</Text>
+            <Text style={styles.infoValue}>username</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.modifyButton}
+            onPress={() => navigation.navigate("")}
+          >
+            <Text style={styles.modifyText}>Modifier</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.infoRow}>
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoLabel}>Nom</Text>
@@ -29,6 +41,30 @@ const PersonalData = ({ navigation }) => {
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoLabel}>Prénom</Text>
             <Text style={styles.infoValue}>Sophie</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.modifyButton}
+            onPress={() => navigation.navigate("")}
+          >
+            <Text style={styles.modifyText}>Modifier</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.infoRow}>
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoLabel}>Date de naissance</Text>
+            <Text style={styles.infoValue}>01/01/2024</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.modifyButton}
+            onPress={() => navigation.navigate("")}
+          >
+            <Text style={styles.modifyText}>Modifier</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.infoRow}>
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoLabel}>Genre</Text>
+            <Text style={styles.infoValue}>Autre</Text>
           </View>
           <TouchableOpacity
             style={styles.modifyButton}
