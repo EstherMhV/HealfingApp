@@ -15,7 +15,7 @@ const Mindfulness = ({ navigation }) => {
     {
       title: "Marche consciente",
       image: require("../../assets/meditation.png"),
-      navigateTo: "",
+      navigateTo: "Exercice",
     },
     {
       title: "Manger en pleine conscience",

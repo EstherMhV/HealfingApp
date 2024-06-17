@@ -38,7 +38,10 @@ const Exercice = ({ navigation }) => {
           Ressentez la tension se dissiper doucement.{"\n"}
           Finissez en état de calme profond.
         </Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack("ExerciceGo")}
+          style={styles.button}
+        >
           <Text style={styles.buttonText}>Commencer</Text>
         </TouchableOpacity>
       </ScrollView>
