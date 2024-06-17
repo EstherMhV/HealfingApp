@@ -5,7 +5,7 @@ const userController = require('../controllers/UsersController');
 const jwtMiddleware = require('../middlewares/jwtMiddleware');
 
 router
-    .route('/create')
+    .route('/')
     .post(userController.create);
 
 router
@@ -13,7 +13,7 @@ router
     .post(userController.login);
 
 router
-    .route('/')
+    .route('/getAll')
     .get(jwtMiddleware.verifyToken, jwtMiddleware.verifyAdmin, userController.getAll)
 
 router

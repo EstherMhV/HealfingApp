@@ -3,14 +3,19 @@ require('dotenv').config();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { Sequelize } = require('sequelize');
-const User = require('./models/UserModel');
 const app = express();
 const port = process.env.PORT;
 
 
+require('./models/UserModel');
 require('./models/MissionModel');
 require('./models/ExerciceModel');
 require('./models/MissionExerciceModel');
+require('./models/ContactModel');
+require('./models/DiaryEntriesModel');
+require('./models/ImportantNumberModel');
+require('./models/InfoModel');
+require('./models/NewsModel');
 require('./models/Associations');
 
 app.use(cors());
