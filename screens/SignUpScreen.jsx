@@ -4,7 +4,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import { View, TextInput, Image, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 
-import Logo from '../assets/logo.png';
+
 
 function Header() {
   return (
