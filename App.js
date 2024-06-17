@@ -16,14 +16,16 @@ import Settings from "./screens/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
 import DailyMissions from "./screens/dailyMissions.jsx";
 import Chargement from "./screens/chargementScreen.jsx";
-import PersonalData from "./screens/personalDataScreen.jsx";
+
 import Exercice from "./screens/exercices/_id/exercice_id.jsx";
 import ExerciceGo from "./screens/exercices/_id/exercice_go.jsx";
 import ArtTherapy from "./screens/exercices/artTherapyScreen.jsx";
 import Meditation from "./screens/exercices/meditationScreen.jsx";
 import CategoriesExercices from "./screens/categoriesExercices.jsx";
 import Mindfulness from "./screens/exercices/mindfulnessScreen.jsx";
+import PersonalData from "./screens/settings/personalDataScreen.jsx";
 import DeepBreathing from "./screens/exercices/deepBreathingScreen.jsx";
+import PasswordSecurity from "./screens/settings/passwordSecurity.jsx";
 import MuscleRelaxation from "./screens/exercices/muscleRelaxationScreen.jsx";
 import SensoryAnchoring from "./screens/exercices/sensoryAnchoringScreen.jsx";
 import AuditoryRelaxation from "./screens/exercices/auditoryRelaxationScreen.jsx";
@@ -34,7 +36,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="PasswordSecurity">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -99,6 +101,11 @@ export default function App() {
             name="Settings"
             component={Settings}
             options={{ title: "Paramètres" }}
+          />
+          <Stack.Screen
+            name="PasswordSecurity"
+            component={PasswordSecurity}
+            options={{ title: "Mot de passe et security" }}
           />
           <Stack.Screen
             name="personalData"
