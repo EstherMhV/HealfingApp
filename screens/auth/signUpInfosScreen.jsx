@@ -10,8 +10,6 @@ import { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import dotenv from 'dotenv';
-import { API_URL } from '@env';
 
 
 const SignUpInfosScreen = ({ route }) => {
@@ -33,7 +31,7 @@ const SignUpInfosScreen = ({ route }) => {
       return;
     }
 
-    fetch(`${API_URL}/users/create`, {
+    fetch(`https://localhost:3302/users/create`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +54,7 @@ const SignUpInfosScreen = ({ route }) => {
           const err = await response.json();
           throw new Error(
             "Une erreur s'est produite lors de la création du compte: " +
-              (err.message || response.statusText)
+            (err.message || response.statusText)
           );
         }
       })
