@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import Menu from "../components/Menu.jsx";
+import Menu from "../../components/Menu.jsx";
 import { Ionicons } from "@expo/vector-icons";
 
 const Settings = ({ navigation }) => {

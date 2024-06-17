@@ -10,7 +10,7 @@ import Diary from "./screens/diaryScreen.jsx";
 import SignUp from "./screens/signUpScreen.jsx";
 import Contact from "./screens/contactScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
-import Settings from "./screens/settingsScreen.jsx";
+import Settings from "./screens/settings/settingsScreen.jsx";
 import AddDataDiary from "./screens/addDataDiary.jsx";
 import DailyMissions from "./screens/dailyMissions.jsx";
 import Chargement from "./screens/chargementScreen.jsx";
