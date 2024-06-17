@@ -15,13 +15,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bitcode": false,
+      "supportsTablet": true,
+      "icon": "./assets/icon.png",
+      "bundleIdentifier": "com.healfingapp.healfingapp",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.heafingapp.heafingapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

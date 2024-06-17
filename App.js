@@ -7,6 +7,7 @@ import News from "./screens/newsScreen.jsx";
 import Error404 from "./screens/error404.jsx";
 import Login from "./screens/loginScreen.jsx";
 import Diary from "./screens/diaryScreen.jsx";
+
 import SignUp from "./screens/signUpScreen.jsx";
 import Contact from "./screens/contactScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
@@ -15,6 +16,7 @@ import AddDataDiary from "./screens/addDataDiary.jsx";
 import DailyMissions from "./screens/DailyMissions.jsx";
 import Chargement from "./screens/chargementScreen.jsx";
 import PersonalData from "./screens/personalDataScreen.jsx";
+import Exercice from "./screens/exercices/_id/exercice_id.jsx";
 import ArtTherapy from "./screens/exercices/ArtTherapyScreen.jsx";
 import Meditation from "./screens/exercices/meditationScreen.jsx";
 import CategoriesExercices from "./screens/categoriesExercices.jsx";
@@ -30,7 +32,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="DailyMissions">
+        <Stack.Navigator initialRouteName="Exercice">
           <Stack.Screen
             name="SignUp"
             component={SignUp}
@@ -50,6 +52,11 @@ export default function App() {
             name="DailyMissions"
             component={DailyMissions}
             options={{ title: "Missions quotidiennes" }}
+          />
+          <Stack.Screen
+            name="Exercice"
+            component={Exercice}
+            options={{ title: "Exercice" }}
           />
           <Stack.Screen
             name="News"
