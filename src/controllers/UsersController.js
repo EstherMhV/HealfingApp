@@ -13,6 +13,8 @@ const UserController = {
                 username,
                 email,
                 password,
+                gender,
+                birthdate,
                 level: 1,
                 xp: 0,
                 role: 'user'

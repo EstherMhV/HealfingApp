@@ -22,6 +22,14 @@ const User = sequelize.define('User', {
             this.setDataValue('password', hash);
         }
     },
+    gender: {
+        type: DataTypes.ENUM,
+        values: ['Homme', 'Femme', 'Autre'],
+    },
+    birthdate: {
+        type: DataTypes.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+    },
     role: {
         type: Sequelize.STRING,
         defaultValue: 'user'

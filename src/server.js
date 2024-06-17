@@ -8,7 +8,6 @@ const app = express();
 const port = process.env.PORT;
 
 
-
 require('./models/MissionModel');
 require('./models/ExerciceModel');
 require('./models/MissionExerciceModel');
