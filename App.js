@@ -9,6 +9,7 @@ import Login from "./screens/loginScreen.jsx";
 import Diary from "./screens/diaryScreen.jsx";
 
 import SignUp from "./screens/signUpScreen.jsx";
+import SignUpInfos from "./screens/signUpInfosScreen.jsx";
 import Contact from "./screens/contactScreen.jsx";
 import Profile from "./screens/profileScreen.jsx";
 import Settings from "./screens/settingsScreen.jsx";
@@ -38,6 +39,11 @@ export default function App() {
             name="SignUp"
             component={SignUp}
             options={{ title: "Inscription" }}
+          />
+          <Stack.Screen
+            name="SignUpInfos"
+            component={SignUpInfos}
+            options={{ title: "Finalise ton inscription" }}
           />
           <Stack.Screen
             name="Login"

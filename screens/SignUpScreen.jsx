@@ -1,71 +1,144 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState, useRef, useLayoutEffect } from 'react';
+import { View, TextInput, Image, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-const SignUp = ({ navigation }) => {
+
+import Logo from '../assets/logo.png';
+
+function Header() {
+  return (
+    <View style={styles.header}>
+      <Text style={styles.headerText}>Inscription</Text>
+    </View>
+  );
+}
+
+const SignUpScreen = () => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState('');
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const navigation = useNavigation();
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const navigateToSignUpInfosScreen = () => {
+    if (validateEmail() && validatePassword() && passwordsMatch()) {
+      navigation.navigate("SignUpInfos", {
+        email: email,
+        password: password,
+      });
+    }
+  };
+
+  const validateEmail = () => {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (emailRegex.test(email)) {
+      setEmailError("");
+      return true;
+    } else {
+      setEmailError("Email invalide");
+      return false;
+    }
+  };
+
+  const validatePassword = () => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordRegex.test(password)) {
+      setPasswordError(
+        "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un chiffre et un caractère spécial"
+      );
+      return false;
+    } else {
+      setPasswordError("");
+      return true;
+    }
+  };
+
+  const passwordsMatch = () => {
+    if (password !== passwordConfirm) {
+      setPasswordError("Les mots de passe ne correspondent pas");
+      return false;
+    }
+    return true;
+  };
+
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: '#3F317E',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        marginLeft: 20,
+      },
+      headerTitle: "Inscription",
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.background}>
       <View style={styles.container}>
-        <Image source={require("../assets/logo.png")} style={styles.logo} />
+        <Image
+          source={require('../assets/logo.png')}
+          style={{ width: 200, height: 200, marginBottom: 20 }}
+        />
         <View style={styles.inputContainer}>
-          <Ionicons
-            name="person-outline"
-            size={30}
-            color="#fff"
-            style={styles.icon}
-          />
+          <Ionicons name="mail-outline" size={30} color="#fff" style={styles.icon} />
           <TextInput
-            style={styles.input}
-            placeholder="Pseudo"
-            placeholderTextColor="#fff"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Ionicons
-            name="mail-outline"
-            size={30}
-            color="#fff"
-            style={styles.icon}
-          />
-          <TextInput
-            style={styles.input}
             placeholder="Email"
-            placeholderTextColor="#fff"
-            keyboardType="email-address"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Ionicons
-            name="lock-closed-outline"
-            size={30}
-            color="#fff"
-            style={styles.icon}
-          />
-          <TextInput
+            value={email}
+            onChangeText={setEmail}
             style={styles.input}
-            placeholder="Mot de passe"
-            placeholderTextColor="#fff"
-            keyboardType="email-address"
+          />
+          {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+        </View>
+        <View style={styles.inputContainer}>
+          <Ionicons name="lock-closed-outline" size={30} color="#fff" style={styles.icon} />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!passwordVisible}
+            style={styles.input}
+          />
+          <TouchableOpacity onPress={togglePasswordVisibility}>
+            <Ionicons
+              name={passwordVisible ? "eye-off-outline" : "eye-outline"}
+              size={30}
+              color="#fff"
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </View>
+        {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
+        <View style={styles.inputContainer}>
+          <Ionicons name="lock-closed-outline" size={30} color="#fff" style={styles.icon} />
+          <TextInput
+            placeholder="Confirm Password"
+            value={passwordConfirm}
+            onChangeText={setPasswordConfirm}
+            secureTextEntry={!passwordVisible}
+            style={styles.input}
           />
         </View>
-
-        <TouchableOpacity style={styles.button}>
+        {error ? <Text style={styles.error}>{error}</Text> : null}
+        <TouchableOpacity style={styles.button} onPress={navigateToSignUpInfosScreen}>
           <Text style={styles.buttonText}>S'inscrire</Text>
         </TouchableOpacity>
-
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <Text style={styles.linkText}>Déjà un compte ? Connexion</Text>
         </TouchableOpacity>
-
-        <Text style={styles.socialText}>Ou inscrivez-vous :</Text>
+        <Text style={styles.socialText}>Suivez nous sur :</Text>
         <View style={styles.socialContainer}>
           <TouchableOpacity>
             <Ionicons name="logo-instagram" size={40} color="#f4fefe" />
@@ -112,24 +185,24 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     height: 50,
-    color: "#fff",
+    color: "#E6E0F0",
   },
   button: {
     width: "100%",
     height: 50,
-    backgroundColor: "#00BFFF",
+    backgroundColor: "#B8F8FF",
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 20,
   },
   buttonText: {
-    color: "#fff",
+    color: "#120B2D",
     fontSize: 18,
     fontWeight: "bold",
   },
   linkText: {
-    color: "#fff",
+    color: "#E6E0F0",
     marginVertical: 10,
   },
   socialText: {
@@ -141,6 +214,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "50%",
   },
+  error: {
+    color: 'red',
+    marginTop: 10,
+  },
 });
 
-export default SignUp;
+export default SignUpScreen;
