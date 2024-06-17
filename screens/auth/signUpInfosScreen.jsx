@@ -10,10 +10,13 @@ import { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import dotenv from 'dotenv';
+import { API_URL } from '@env';
+
 
 const SignUpInfosScreen = ({ route }) => {
   const navigation = useNavigation();
-  const { email, password } = useState("");
+  const { email, password } = route.params;
   const [username, setUsername] = useState("");
   const [birthdate, setBirthdate] = useState(new Date());
   const [gender, setGender] = useState("");
@@ -23,14 +26,15 @@ const SignUpInfosScreen = ({ route }) => {
     setBirthdate(currentDate);
   };
 
+
   const createAccount = () => {
     if (!email || !username) {
       Alert.alert("Erreur", "Email et nom d'utilisateur sont requis.");
       return;
     }
 
-    fetch("https://healfing-68534dd214c6.herokuapp.com/users/create", {
-      method: "POST",
+    fetch(`${API_URL}/users/create`, {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
@@ -49,7 +53,6 @@ const SignUpInfosScreen = ({ route }) => {
         if (response.ok) {
           return response.json();
         } else {
-          // Récupérer le corps de la réponse pour obtenir les détails de l'erreur
           const err = await response.json();
           throw new Error(
             "Une erreur s'est produite lors de la création du compte: " +
