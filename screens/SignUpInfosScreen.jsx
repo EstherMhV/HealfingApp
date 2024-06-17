@@ -1,6 +1,6 @@
-import { getApps } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { Timestamp, doc, setDoc, getFirestore } from "firebase/firestore";
+import { getApps } from '@react-native-firebase/app';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from '@react-native-firebase/auth';
+import { Timestamp, doc, setDoc, getFirestore } from '@react-native-firebase/firestore';
 import firestore from '@react-native-firebase/firestore';
 import React, { useState } from "react";
 import {
@@ -39,6 +39,7 @@ const SignUpInfosScreen = ({ route }) => {
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        console.log(`birthdate: ${birthdate}, gender: ${gender}`);
         const user = userCredential.user;
         updateProfile(user, {
           displayName: username,
