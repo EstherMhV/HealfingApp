@@ -33,7 +33,7 @@ const Exercice = sequelize.define('Exercice', {
 (async () => {
     try {
         await Exercice.sync({ force: false });
-        console.log("Modèle Table Exercice synchronisé avec la base de données.");
+
     } catch (error) {
         console.error("Erreur lors de la synchronisation du modèle Table: Exercice ", error);
     }

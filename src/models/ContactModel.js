@@ -20,9 +20,8 @@ const Contact = sequelize.define('Contact', {
 (async () => {
     try {
         await Contact.sync({ force: false });
-        console.log("Modèle Table Contact synchronisé avec la base de données.");
     } catch (error) {
-        console.error("Erreur lors de la synchronisation du modèle Table: Contact", error);
+        console.error('Unable to sync the model with the database', error);
     }
 })();
 

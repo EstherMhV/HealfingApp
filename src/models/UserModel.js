@@ -51,7 +51,7 @@ const User = sequelize.define('User', {
 (async () => {
     try {
         await User.sync({ force: false });
-        console.log("Modèle Table Users synchronisé avec la base de données.");
+
     } catch (error) {
         console.error("Erreur lors de la synchronisation du modèle Table: Users", error);
     }

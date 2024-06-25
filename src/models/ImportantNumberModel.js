@@ -18,7 +18,7 @@ const ImportantNumber = sequelize.define('ImportantNumber', {
 (async () => {
     try {
         await ImportantNumber.sync({ force: false });
-        console.log("Modèle Table ImportantNumbers synchronisé avec la base de données.");
+        
     } catch (error) {
         console.error("Erreur lors de la synchronisation du modèle Table:ImportantNumbers", error);
     }

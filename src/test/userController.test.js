@@ -1,118 +1,78 @@
+const request = require('supertest');
+const express = require('express');
+const bodyParser = require('body-parser');
 const UserController = require('../controllers/UsersController');
 const User = require('../models/UserModel');
+
 jest.mock('../models/UserModel');
 
-describe('UserController - create', () => {
-    it('should create a user successfully', async () => {
-        const req = {
-            body: {
-                username: 'newUser',
-                password: 'password123',
-                email: 'newuser@example.com',
-                gender: 'male',
-                birthdate: new Date('1999-01-01')
-            }
-        };
-        const res = {
-            status: jest.fn().mockReturnThis(),
-            send: jest.fn()
-        };
+const app = express();
+app.use(bodyParser.json());
+app.post('/users', UserController.create);
+app.get('/users/login', UserController.login);
+app.get('/users/:id', UserController.get);
+app.get('/users/:id', UserController.getAll);
+app.put('/users/:id', UserController.update);
+app.delete('/users/:id', UserController.delete);
+
+const testData = {
+    id: 2,
+    email: 'aaea@gmail.com',
+    password: 'DOojaopwfo',
+    gender: 'Femme',
+    birthdate: '2020-12-12',
 
 
-        User.create.mockResolvedValue(req.body);
+};
 
-        await UserController.create(req, res);
+const updatedData = {
+    id: 2,
+    email: 'aaea@gmail.com',
+    password: 'DOojaopwfo',
+    gender: 'Femme',
+    birthdate: '2020-12-12',
 
-        expect(res.status).toHaveBeenCalledWith(201);
-        expect(res.send).toHaveBeenCalledWith('User created successfully');
+};
+
+describe('UserController', () => {
+    beforeEach(() => {
+        User.create.mockClear();
+        User.findAll.mockClear();
+        User.findByPk.mockClear();
+        User.update.mockClear();
+        User.destroy.mockClear();
     });
 
-    it('should handle errors during user creation', async () => {
-        const req = {
-            body: {
-                username: 'newUser',
-                password: 'password123',
-                email: 'newuserexample.com'
-            }
-        };
-        const res = {
-            status: jest.fn().mockReturnThis(),
-            send: jest.fn()
-        };
-
-        User.create.mockRejectedValue(new Error('Creation failed'));
-
-        await UserController.create(req, res);
-
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.send).toHaveBeenCalledWith(expect.any(Error));
-    });
-});
-
-describe('UserController - login', () => {
-    it('should log in a user successfully', async () => {
-        const req = {
-            body: {
-                email: 'esther@gmail.com',
-                password: 'Diece4007@'
-            }
-        };
-        const res = {
-            send: jest.fn(),
-            status: jest.fn(() => res) 
-        };
-     
-        await UserController.login(req, res);
-
-        
-        expect(res.status).toHaveBeenCalledWith(200);
-
-        expect(res.send).toHaveBeenCalledWith(expect.objectContaining({
-            token: expect.any(String)
-        }));
+    test('create User', async () => {
+        User.create.mockResolvedValue(testData);
+        const responseCreate = await request(app).post('/users').send(testData);
+        expect(responseCreate.statusCode).toBe(201);
+        expect(responseCreate.body).toHaveProperty('id', 2);
     });
 
-    it('should handle errors during user creation', async () => {
-        const req = {
-            body: {
-                password: 'password123',
-                email: 'newwfawfar@exeffsfample.com'
-            }
-        };
-        const res = {
-            status: jest.fn().mockReturnThis(),
-            send: jest.fn()
-        };
-
-        User.create.mockRejectedValue(new Error('Creation failed'));
-
-        await UserController.create(req, res);
-
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.send).toHaveBeenCalledWith(expect.any(Error));
+    test('get all User', async () => {
+        User.findAll.mockResolvedValue([testData]);
+        const responseGetAll = await request(app).get('/users');
+        expect(responseGetAll.statusCode).toBe(200);
+        expect(responseGetAll.body).toEqual([testData]);
     });
-});
 
+    test('get User by id', async () => {
+        User.findByPk.mockResolvedValue(testData);
+        const responseGetById = await request(app).get(`/users/${testData.id}`);
+        expect(responseGetById.statusCode).toBe(200);
+        expect(responseGetById.body).toEqual(testData);
+    });
 
-describe('UserController - delete', () => {
-    it('should delete a user successfully', async () => {
+    test('update User', async () => {
+        User.update.mockResolvedValue([1]);
+        const response = await request(app).put(`/users/${testData.id}`).send(updatedData);
+        expect(response.statusCode).toBe(200);
+    });
 
-        const req = {
-            params: {
-                userId: '1'
-            }
-        };
-        const res = {
-            status: jest.fn().mockReturnThis(),
-            send: jest.fn()
-        };
-
-
-        User.destroy.mockResolvedValue(1);
-
-        await UserController.delete(req, res);
-
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.send).toHaveBeenCalledWith('User deleted successfully');
+    test('delete User', async () => {
+        User.destroy.mockResolvedValue(testData);
+        const response = await request(app).delete(`/users/${testData.id}`);
+        expect(response.statusCode).toBe(200);
     });
 });

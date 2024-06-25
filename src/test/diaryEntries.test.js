@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const DiaryEntriesController = require('../controllers/DiaryEntriesController');
 const DiaryEntries = require('../models/DiaryEntriesModel');
 
-jest.mock('../models/ExerciceModel');
+jest.mock('../models/DiaryEntriesModel');
 
 const app = express();
 app.use(bodyParser.json());
@@ -43,7 +43,7 @@ describe('DiaryEntriesController', () => {
         DiaryEntries.destroy.mockClear();
     });
 
-    test('create Exercice', async () => {
+    test('create DiaryEntries', async () => {
         DiaryEntries.create.mockResolvedValue(testData);
         const responseCreate = await request(app).post('/diaryEntries').send(testData);
         expect(responseCreate.statusCode).toBe(201);

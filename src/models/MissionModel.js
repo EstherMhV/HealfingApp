@@ -35,7 +35,7 @@ const Mission = sequelize.define('Mission', {
 (async () => {
     try {
         await Mission.sync({ force: false });
-        console.log("Modèle  Missions synchronisé avec la base de données.");
+        
     } catch (error) {
         console.error("Erreur lors de la synchronisation du modèle Table: Missions", error);
     }

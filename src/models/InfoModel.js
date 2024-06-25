@@ -17,7 +17,7 @@ const Info = sequelize.define('Info', {
 (async () => {
     try {
         await Info.sync({ force: false });
-        console.log("Modèle Table Infos synchronisé avec la base de données.");
+        
     } catch (error) {
         console.error("Erreur lors de la synchronisation du modèle Table:Info", error);
     }
