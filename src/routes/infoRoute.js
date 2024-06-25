@@ -4,7 +4,7 @@ const InfosController = require('../controllers/InfosController');
 const jwtMiddleware = require('../middlewares/jwtMiddleware');
 
 router
-    .route('/')
+    .route('/infos')
     .get(InfosController.getAll)
     .post(InfosController.create);
 

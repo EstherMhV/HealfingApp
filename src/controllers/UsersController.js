@@ -21,7 +21,7 @@ const UserController = {
                 role: 'user'
             });
 
-            res.status(201).send(user);
+            res.status(201).send("User created successfully");
         } catch (error) {
             res.status(500).send(error);
         }
@@ -45,7 +45,7 @@ const UserController = {
 
             const token = jwt.sign({ id: user.id }, 'your-secret-key', { expiresIn: '1h' });
 
-            res.status(200).send({ message: 'Logged in successfully' });
+            res.status(200).send({ message: 'Logged in successfully', token: token  });
         } catch (error) {
             res.status(500).send({ message: 'error login', message: error });
         }

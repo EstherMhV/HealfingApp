@@ -1,11 +1,11 @@
-const Mission = require('../models/MissionModel');
+const News = require('../models/NewsModel');
 
-const MissionController = {
+const NewsController = {
 
     create: async (req, res) => {
         try {
-            const mission = await Mission.create(req.body);
-            res.status(201).send(mission);
+            const news = await News.create(req.body);
+            res.status(201).send(news);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -13,8 +13,8 @@ const MissionController = {
 
     getAll: async (req, res) => {
         try {
-            const missions = await Mission.findAll();
-            res.status(200).send(missions);
+            const news = await News.findAll();
+            res.status(200).send(news);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -23,8 +23,8 @@ const MissionController = {
 
     get: async (req, res) => {
         try {
-            const mission = await Mission.findByPk(req.params.id);
-            res.status(200).send(mission);
+            const news = await News.findByPk(req.params.id);
+            res.status(200).send(news);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -33,10 +33,10 @@ const MissionController = {
 
     update: async (req, res) => {
         try {
-            await Mission.update(req.body, {
+            await News.update(req.body, {
                 where: { id: req.params.id }
             });
-            res.status(200).send('Mission updated successfully');
+            res.status(200).send('News updated successfully');
         } catch (error) {
             res.status(500).send(error);
         }
@@ -45,14 +45,14 @@ const MissionController = {
 
     delete: async (req, res) => {
         try {
-            await Mission.destroy({
+            await News.destroy({
                 where: { id: req.params.id }
             });
-            res.status(200).send('Mission deleted successfully');
+            res.status(200).send('News deleted successfully');
         } catch (error) {
             res.status(500).send(error);
         }
     }
 };
 
-module.exports = MissionController;
+module.exports = NewsController;

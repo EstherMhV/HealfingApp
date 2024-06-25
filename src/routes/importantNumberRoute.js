@@ -6,12 +6,12 @@ const jwtMiddleware = require('../middlewares/jwtMiddleware');
 router
     .route('/importantNumbers')
     .get(ImportantNumberController.getAll)
-    .post(jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ImportantNumberController.create);
+    .post(jwtMiddleware.verifyToken, jwtMiddleware.verifyAdmin, ImportantNumberController.create);
 
 router
     .route('/importantNumbers/:id')
-    .get(jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ImportantNumberController.get)
-    .put(jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ImportantNumberController.update)
-    .delete(jwtMiddleware.verifyToken,jwtMiddleware.verifyAdmin ,ImportantNumberController.delete);
+    .get(jwtMiddleware.verifyToken, jwtMiddleware.verifyAdmin, ImportantNumberController.get)
+    .put(jwtMiddleware.verifyToken, jwtMiddleware.verifyAdmin, ImportantNumberController.update)
+    .delete(jwtMiddleware.verifyToken, jwtMiddleware.verifyAdmin, ImportantNumberController.delete);
 
 module.exports = router;

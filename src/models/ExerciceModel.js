@@ -8,6 +8,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const Exercice = sequelize.define('Exercice', {
     title: DataTypes.STRING,
     picture: DataTypes.STRING,
+    preparation: DataTypes.STRING,
+    description: DataTypes.STRING,
     role: {
         type: DataTypes.ENUM,
         values: ['Médiation', 'Respiration profonde', 'Relaxation Musculaire', 'Pleine Conscience', 'Ancrage sensoriel', 'Relaxation Auditive', 'Art thérapie'],
