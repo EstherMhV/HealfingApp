@@ -16,6 +16,7 @@ app.put('/users/:id', UserController.update);
 app.delete('/users/:id', UserController.delete);
 
 const testData = {
+    id: 2,
     email: 'aaea@gmail.com',
     password: 'DOojaopwfo',
     gender: 'Femme',
@@ -25,6 +26,7 @@ const testData = {
 };
 
 const updatedData = {
+    id: 2,
     email: 'aaea@gmail.com',
     password: 'DOojaopwfeafeaao',
     gender: 'Femme',
@@ -45,7 +47,7 @@ describe('UserController', () => {
         User.create.mockResolvedValue(testData);
         const responseCreate = await request(app).post('/users').send(testData);
         expect(responseCreate.statusCode).toBe(201);
-        expect(responseCreate.body).toHaveProperty(testData.id);
+        expect(responseCreate.body).toEqual(testData);
     });
 
     test('get all User', async () => {
