@@ -75,4 +75,5 @@ describe('ContactController', () => {
         const response = await request(app).delete(`/contacts/${testData.id}`);
         expect(response.statusCode).toBe(200);
     });
+    
 });

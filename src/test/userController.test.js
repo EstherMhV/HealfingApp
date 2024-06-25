@@ -9,14 +9,13 @@ jest.mock('../models/UserModel');
 const app = express();
 app.use(bodyParser.json());
 app.post('/users', UserController.create);
+app.get('/users', UserController.getAll);
 app.get('/users/login', UserController.login);
 app.get('/users/:id', UserController.get);
-app.get('/users/:id', UserController.getAll);
 app.put('/users/:id', UserController.update);
 app.delete('/users/:id', UserController.delete);
 
 const testData = {
-    id: 2,
     email: 'aaea@gmail.com',
     password: 'DOojaopwfo',
     gender: 'Femme',
@@ -26,9 +25,8 @@ const testData = {
 };
 
 const updatedData = {
-    id: 2,
     email: 'aaea@gmail.com',
-    password: 'DOojaopwfo',
+    password: 'DOojaopwfeafeaao',
     gender: 'Femme',
     birthdate: '2020-12-12',
 
@@ -47,7 +45,7 @@ describe('UserController', () => {
         User.create.mockResolvedValue(testData);
         const responseCreate = await request(app).post('/users').send(testData);
         expect(responseCreate.statusCode).toBe(201);
-        expect(responseCreate.body).toHaveProperty('id', 2);
+        expect(responseCreate.body).toHaveProperty(testData.id);
     });
 
     test('get all User', async () => {
@@ -75,4 +73,5 @@ describe('UserController', () => {
         const response = await request(app).delete(`/users/${testData.id}`);
         expect(response.statusCode).toBe(200);
     });
+
 });

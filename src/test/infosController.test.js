@@ -69,4 +69,5 @@ describe('InfoController', () => {
         const response = await request(app).delete(`/infos/${testData.id}`);
         expect(response.statusCode).toBe(200);
     });
+
 });
