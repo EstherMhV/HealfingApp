@@ -6,6 +6,8 @@ const Mission = require('../models/MissionModel');
 
 jest.mock('../models/MissionModel');
 
+
+
 const app = express();
 app.use(bodyParser.json());
 app.post('/missions', MissionController.create);

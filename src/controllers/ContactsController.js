@@ -2,7 +2,7 @@
 const Contact = require('../models/ContactModel');
 
 
-const DiaryEntriesController = {
+const ContactsController = {
 
     createContact: async (req, res) => {
         try {
@@ -61,3 +61,5 @@ const DiaryEntriesController = {
         }
     },
 }
+
+module.exports = ContactsController;

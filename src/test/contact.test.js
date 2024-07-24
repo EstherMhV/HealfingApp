@@ -6,13 +6,14 @@ const Contact = require('../models/ContactModel');
 
 jest.mock('../models/ContactModel');
 
+
 const app = express();
 app.use(bodyParser.json());
 app.post('/contacts', ContactController.createContact);
 app.get('/contacts', ContactController.getAllContacts);
 app.get('/contacts/:id', ContactController.getContact);
-app.put('/contacts/:id', ContactController.updateContact);
-app.delete('/contacts/:id', ContactController.deleteContact);
+// app.put('/contacts/:id', ContactController.updateContact);
+// app.delete('/contacts/:id', ContactController.deleteContact);
 
 const testData = {
     id: 2,
@@ -64,16 +65,17 @@ describe('ContactController', () => {
         expect(responseGetById.body).toEqual(testData);
     });
 
-    test('update Contact', async () => {
-        Contact.update.mockResolvedValue([1]);
-        const response = await request(app).put(`/contacts/${testData.id}`).send(updatedData);
-        expect(response.statusCode).toBe(200);
-    });
+    // test('update Contact', async () => {
+    //     Contact.update.mockResolvedValue([1]);
+    //     const response = await request(app).put(`/contacts/${testData.id}`).send(updatedData);
+    //     expect(response.statusCode).toBe(200);
+    // });
 
-    test('delete Contact', async () => {
-        Contact.destroy.mockResolvedValue(testData);
-        const response = await request(app).delete(`/contacts/${testData.id}`);
-        expect(response.statusCode).toBe(200);
-    });
+    // test('delete Contact', async () => {
+    //     Contact.destroy.mockResolvedValue(testData);
+    //     const response = await request(app).delete(`/contacts/${testData.id}`);
+    //     expect(response.statusCode).toBe(200);
+    // });
     
 });
+

@@ -6,6 +6,8 @@ const Info = require('../models/InfoModel');
 
 jest.mock('../models/InfoModel');
 
+
+
 const app = express();
 app.use(bodyParser.json());
 app.post('/infos', infoController.create);

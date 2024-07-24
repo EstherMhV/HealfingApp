@@ -6,6 +6,8 @@ const DiaryEntries = require('../models/DiaryEntriesModel');
 
 jest.mock('../models/DiaryEntriesModel');
 
+
+
 const app = express();
 app.use(bodyParser.json());
 app.post('/diaryEntries', DiaryEntriesController.create);

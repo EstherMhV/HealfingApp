@@ -18,7 +18,13 @@ require('./models/InfoModel');
 require('./models/NewsModel');
 require('./models/Associations');
 
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+    origin: '*', // For development, you might set this to '*'. For production, replace with your actual frontend URL.
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

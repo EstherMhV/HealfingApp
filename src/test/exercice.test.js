@@ -6,6 +6,8 @@ const Exercice = require('../models/ExerciceModel');
 
 jest.mock('../models/ExerciceModel');
 
+
+
 const app = express();
 app.use(bodyParser.json());
 app.post('/exercices', ExercicesController.create);
